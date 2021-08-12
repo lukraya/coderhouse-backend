@@ -6,13 +6,20 @@ class Carrito {
         return this.prodsCarrito
     }
 
-    nuevoProd(producto) {        
+    nuevoProd(producto, timestamp) {        
         this.prodsCarrito.push({
-            title: producto.title,
-            price: producto.price,
-            thumbnail: producto.thumbnail,
-            //idProd: producto.id,
-            idCart: ++this.idCarrito
+            idCart: ++this.idCarrito,
+            timestamp: timestamp,
+            producto: {
+                title: producto.title,
+                price: producto.price,
+                thumbnail: producto.thumbnail,
+                description: producto.description,
+                timestamp: producto.timestamp,
+                stock: producto.stock,
+                code: producto.code,
+                idProd: producto.id,                
+            }
         });
 
         return (this.prodsCarrito[this.idCarrito - 1])
@@ -29,17 +36,6 @@ class Carrito {
         return prod
     }
 
-    /* actualizarProducto(cambios, id) {
-        let indiceProd = this.productos.findIndex(prod=>{
-            return prod.id == id
-        })
-        if (indiceProd < 0) {
-            return '{error: "Producto no encontrado."}'
-        }
-        let prodActualizado = {...cambios, id: id}
-        return this.productos[indiceProd] = prodActualizado;
-    } */
-
     eliminarProd(id) {
         let indiceProd = this.prodsCarrito.findIndex(prod=>{
             return prod.idCart == id
@@ -48,4 +44,4 @@ class Carrito {
     }
 }
 
-module.exports= new Carrito;
+module.exports = new Carrito;

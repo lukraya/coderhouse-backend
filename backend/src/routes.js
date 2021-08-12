@@ -1,14 +1,24 @@
 let productos = require('./Productos')
 let carrito = require('./Carrito')
+const dayjs = require('dayjs')
+
+let admin = true
+
+function checkAdmin(req, res, next) {
+    if(admin) {
+        next()
+    } else {
+        res.send({error: "Acción no autorizada para el usuario"})
+    }
+}
+
+function getTimestamp(req, res, next) {
+    req.body.timestamp = dayjs().format('DD/MM/YYYY HH:mm:ss')
+    next()
+}
 
 module.exports = {
     productos: (router)=>{
-        /* router.get('/', (req, res, next)=>{
-            res.json({
-                msj: "Esto es productos",
-            })
-        }) */
-
         router.get('/listar/:id?', (req, res)=>{
             if (req.params.id) {
                 let id = req.params.id
@@ -18,33 +28,27 @@ module.exports = {
             }
         })
 
-        router.post('/agregar', (req, res)=>{
+        router.post('/agregar', checkAdmin, getTimestamp, (req, res)=>{
             let toAdd = req.body;
-            res.send(productos.nuevoProd(toAdd))
+            res.send({msj: "Producto agregado", producto: productos.nuevoProd(toAdd)})
             //res.redirect('/productos/agregar')
         })
 
-        router.put('/actualizar/:id', (req, res)=>{
+        router.put('/actualizar/:id', checkAdmin, (req, res)=>{
             let toChange = req.body;
             let id = req.params.id;
-            res.send(productos.actualizarProducto(toChange, id))
+            res.send({msj: "Producto actualizado", producto: productos.actualizarProducto(toChange, id)})
         })
 
-        router.delete('/borrar/:id', (req, res)=>{
+        router.delete('/borrar/:id', checkAdmin, (req, res)=>{
             let id = req.params.id;
-            res.send(productos.eliminarProd(id))
+            res.send({msj: "Producto eliminado", producto: productos.eliminarProd(id)})
         })
     
         return router
     },
 
     carrito: (router)=>{
-        /* router.get('/', (req, res, next)=>{
-            res.json({
-                msj: "Esto es carrito"
-            })
-        }) */
-
         router.get('/listar/:id?', (req, res)=>{
             if (req.params.id) {
                 let id = req.params.id
@@ -54,16 +58,18 @@ module.exports = {
             }
         })
 
-        router.post('/agregar/:id_producto', (req, res)=>{
+        router.post('/agregar/:id_producto', getTimestamp, (req, res)=>{
             let id = req.params.id_producto
             let toAdd = productos.mostrarProd(id)
-            res.send(carrito.nuevoProd(toAdd))
+            let timestamp = req.body.timestamp
+            console.log(timestamp)
+            res.send({msj: "Producto agregado", producto: carrito.nuevoProd(toAdd, timestamp)})
             //res.redirect('/productos/agregar')
         })
 
         router.delete('/borrar/:id', (req, res)=>{
             let id = req.params.id;
-            res.send(carrito.eliminarProd(id))
+            res.send({msj: "Producto eliminado", producto: carrito.eliminarProd(id)})
         })
     
         return router

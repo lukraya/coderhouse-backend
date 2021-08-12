@@ -1,9 +1,16 @@
+const Archivo = require('./Archivo')
+
+let prodFile = new Archivo('./src/files/prodFile.txt')
+
 class Producto {
     productos = [];
     id = 0;
 
     get listarProductos() {
-        return this.productos
+        //return this.productos
+        //let result = prodFile.leer()
+        console.log(`Log P12 ${prodFile.leer()}`)
+        return prodFile.leer()
     }
 
     nuevoProd(producto) {        
@@ -11,8 +18,14 @@ class Producto {
             title: producto.title,
             price: producto.price,
             thumbnail: producto.thumbnail,
+            description: producto.description,
+            timestamp: producto.timestamp,
+            stock: producto.stock,
+            code: producto.code,
             id: ++this.id
-        });
+        })
+
+        prodFile.guardar(this.productos)
 
         return (this.productos[this.id - 1])
     }
@@ -47,4 +60,4 @@ class Producto {
     }
 }
 
-module.exports= new Producto;
+module.exports = new Producto;
