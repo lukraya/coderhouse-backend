@@ -1,25 +1,26 @@
-class Producto {
-    productos = [];
-    id = 0;
-
+class Carrito {
+    prodsCarrito = [];
+    idCarrito = 0;
+    
     get listarProductos() {
-        return this.productos
+        return this.prodsCarrito
     }
 
     nuevoProd(producto) {        
-        this.productos.push({
+        this.prodsCarrito.push({
             title: producto.title,
             price: producto.price,
             thumbnail: producto.thumbnail,
-            id: ++this.id
+            //idProd: producto.id,
+            idCart: ++this.idCarrito
         });
 
-        return (this.productos[this.id - 1])
+        return (this.prodsCarrito[this.idCarrito - 1])
     }
 
     mostrarProd(id) {
-        let prod = this.productos.find(producto =>{
-            return producto.id == id
+        let prod = this.prodsCarrito.find(producto =>{
+            return producto.idCart == id
         });
         if (prod == undefined) {
             return '{error: "Producto no encontrado."}'
@@ -28,7 +29,7 @@ class Producto {
         return prod
     }
 
-    actualizarProducto(cambios, id) {
+    /* actualizarProducto(cambios, id) {
         let indiceProd = this.productos.findIndex(prod=>{
             return prod.id == id
         })
@@ -37,14 +38,14 @@ class Producto {
         }
         let prodActualizado = {...cambios, id: id}
         return this.productos[indiceProd] = prodActualizado;
-    }
+    } */
 
     eliminarProd(id) {
-        let indiceProd = this.productos.findIndex(prod=>{
-            return prod.id == id
+        let indiceProd = this.prodsCarrito.findIndex(prod=>{
+            return prod.idCart == id
         })
-        return this.productos.splice(indiceProd, 1)[0]
+        return this.prodsCarrito.splice(indiceProd, 1)[0]
     }
 }
 
-module.exports= new Producto;
+module.exports= new Carrito;
