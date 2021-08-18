@@ -34,7 +34,7 @@ module.exports = {
             //res.redirect('/productos/agregar')
         })
 
-        router.put('/actualizar/:id', checkAdmin, (req, res)=>{
+        router.put('/actualizar/:id', checkAdmin, getTimestamp, (req, res)=>{
             let toChange = req.body;
             let id = req.params.id;
             res.send({msj: "Producto actualizado", producto: productos.actualizarProducto(toChange, id)})
@@ -62,9 +62,7 @@ module.exports = {
             let id = req.params.id_producto
             let toAdd = productos.mostrarProd(id)
             let timestamp = req.body.timestamp
-            console.log(timestamp)
             res.send({msj: "Producto agregado", producto: carrito.nuevoProd(toAdd, timestamp)})
-            //res.redirect('/productos/agregar')
         })
 
         router.delete('/borrar/:id', (req, res)=>{

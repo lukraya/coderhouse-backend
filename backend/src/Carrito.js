@@ -1,9 +1,28 @@
+const Archivo = require('./Archivo')
+
+let cartFile = new Archivo('./src/files/cartFile.txt')
+
 class Carrito {
-    prodsCarrito = [];
+    prodsCarrito = cartFile.leer();
     idCarrito = 0;
     
     get listarProductos() {
-        return this.prodsCarrito
+        if (this.prodsCarrito.length>0) {            
+            return this.prodsCarrito
+        } else {
+            return '{error: "No hay productos en carrito."}'
+        }
+    }
+
+    mostrarProd(id) {
+        let prod = this.prodsCarrito.find(producto =>{
+            return producto.idCart == id
+        });
+        if (prod == undefined) {
+            return '{error: "Producto no encontrado."}'
+        }
+
+        return prod
     }
 
     nuevoProd(producto, timestamp) {        
@@ -20,27 +39,22 @@ class Carrito {
                 code: producto.code,
                 idProd: producto.id,                
             }
-        });
+        })
+
+        cartFile.guardar(this.prodsCarrito)
 
         return (this.prodsCarrito[this.idCarrito - 1])
-    }
-
-    mostrarProd(id) {
-        let prod = this.prodsCarrito.find(producto =>{
-            return producto.idCart == id
-        });
-        if (prod == undefined) {
-            return '{error: "Producto no encontrado."}'
-        }
-
-        return prod
     }
 
     eliminarProd(id) {
         let indiceProd = this.prodsCarrito.findIndex(prod=>{
             return prod.idCart == id
         })
-        return this.prodsCarrito.splice(indiceProd, 1)[0]
+        let prodEliminado = this.prodsCarrito.splice(indiceProd, 1)[0]
+        
+        cartFile.guardar(this.prodsCarrito)
+
+        return prodEliminado
     }
 }
 

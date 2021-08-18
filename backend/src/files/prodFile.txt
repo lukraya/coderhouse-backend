@@ -1,0 +1,12 @@
+[
+	{
+		"title": "prod1",
+		"price": 100,
+		"thumbnail": "url1",
+		"description": "un producto",
+		"timestamp": "18/08/2021 02:09:49",
+		"stock": 10,
+		"code": "codigo",
+		"id": 1
+	}
+]

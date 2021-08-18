@@ -1,32 +1,23 @@
-const fs = require('fs');
-
-//const ruta = "./productos.txt";
-//const encode = 'utf-8';
+const fs = require('fs')
 
 module.exports = class Archivo {
     constructor(rutaArchivo) {
-        this.archivo = rutaArchivo;
+        this.ruta = rutaArchivo;
     }
 
-    async leer() {
+    /* async */ leer() {
         try {
-            const contenido = await fs.promises.readFile(this.archivo);
-            //console.log(`Log A14 ${contenido}`);
-            //console.log(`Log A15 ${JSON.parse(contenido)}`);
-            //return JSON.parse(contenido)
-            return contenido
+            const contenido = fs.readFileSync(this.ruta, 'utf-8')
+            return JSON.parse(contenido)
         }
         catch(error) {
             console.log(`No se pudo leer. Error: ${error}`)
         }
     }
 
-    async guardar(/* elemento, */ array) {
-        //const productos = await this.leer();
-        //nuevoProd.id = productos.length + 1;
-        //productos.push(nuevoProd);
+    async guardar(array) {
         try {            
-            await fs.promises.writeFile(this.archivo, JSON.stringify(array, null, "\t"));
+            await fs.promises.writeFile(this.ruta, JSON.stringify(array, null, "\t"));
             console.log("Guardado.")
         }
         catch(error) {
@@ -37,7 +28,7 @@ module.exports = class Archivo {
 
     async borrar() {
         try {
-            fs.promises.unlink(this.archivo)
+            fs.promises.unlink(this.ruta)
         }
         catch(error) {
             console.log("Error al borrar el archivo", error)
