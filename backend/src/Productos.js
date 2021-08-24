@@ -4,7 +4,7 @@ let prodFile = new Archivo('./src/files/prodFile.txt')
 
 class Producto {
     productos = prodFile.leer();
-    id = 0;
+    id = this.productos.length;
 
     get listarProductos() {
         if (this.productos.length>0) {            

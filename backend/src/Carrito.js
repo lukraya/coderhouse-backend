@@ -4,7 +4,7 @@ let cartFile = new Archivo('./src/files/cartFile.txt')
 
 class Carrito {
     prodsCarrito = cartFile.leer();
-    idCarrito = 0;
+    idCarrito = this.prodsCarrito.length;
     
     get listarProductos() {
         if (this.prodsCarrito.length>0) {            
