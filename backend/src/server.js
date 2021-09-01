@@ -1,7 +1,7 @@
 //CONFIG DEL SERVIDOR
 const express = require('express')
-const routesProductos = require('./routesProductos')
-const routesCarrito = require('./routesCarrito')
+const routesProductos = require('./routes/routesProductos')
+//const routesCarrito = require('./routesCarrito')
 const cors = require('cors')
 const compression = require('compression')
 
@@ -15,6 +15,6 @@ app.use(cors())
 app.use(compression())
 
 app.use('/productos', routesProductos(routerProductos))
-app.use('/carrito', routesCarrito(routerCarrito))
+//app.use('/carrito', routesCarrito(routerCarrito))
 
 module.exports = app
