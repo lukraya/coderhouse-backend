@@ -8,17 +8,16 @@ const ItemListContainer = ({greeting})=>{
     }, [])
 
     const requestFetch = async ()=>{
-    const response = await fetch("http://localhost:9000/productos/listar")
-    const result = await response.json()
-    console.log(result)
-    setResultFetch(result)
-    //console.log(resultFetch)
+        const response = await fetch("http://localhost:9000/productos/listar")
+        const result = await response.json()
+        console.log(result)
+        setResultFetch(result)    
     }
 
     return (
         <>
             <h1>{greeting}</h1>
-            <p>{resultFetch[0].name}</p>
+            {/* <p>{resultFetch[0].name}</p> */}
         </>
     )
 }
