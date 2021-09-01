@@ -1,26 +1,21 @@
-import {useEffect, useState} from 'react'
-import './App.css';
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import NavBar from './components/NavBar'
+import ItemListContainer from './components/ItemListContainer'
+import './components/styles.css'
 
-function App() {
-  const [resultFetch, setResultFetch] = useState({})
-
-  useEffect(()=>{
-    requestFetch()
-  }, [])
-
-  const requestFetch = async ()=>{
-    const response = await fetch("http://localhost:9000/api/coder")
-    const result = await response.json()
-    console.log(result)
-    setResultFetch(result)
-  }  
-
+const App = ()=>{
   return (
-    <div className="App">
-      <p>{resultFetch.firstName}</p>
-      <p>{resultFetch.lastName}</p>
-    </div>
-  );
+    <BrowserRouter>
+      <NavBar/>
+      <main>
+        <Switch>
+          <Route path="/" exact>
+            <ItemListContainer greeting="Bienvenidos a la tienda"/>
+          </Route>
+        </Switch>
+      </main>
+    </BrowserRouter>
+  )
 }
 
 export default App;
