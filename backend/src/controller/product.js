@@ -2,9 +2,11 @@
 const ProductService = require('../services/product')
 const product = new ProductService
 
-exports.createProduct = async (req, res, next)=>{        
+exports.createProduct = async (req, res, next)=>{
+    //console.log(req.body)        
     await product.createProduct(req.body)
-    res.json({msg: "Producto creado"})
+    //res.json({msg: "Producto creado"})
+    res.redirect('http://localhost:3000/productos/cargar')
 }
 
 exports.getProduct = async (req, res, next)=>{
@@ -21,6 +23,17 @@ exports.getProduct = async (req, res, next)=>{
 exports.getAllProducts = async (req, res, next)=>{
     const productos = await product.getAllProducts()
     res.json(productos)
+}
+
+exports.getCategory = async (req, res, next)=>{
+    try {
+        const {params: {categoryId}} = req
+        const category = await product.getCategory(categoryId)
+        //console.log(categoryId)
+        res.json(category)
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 exports.updateProduct = async (req, res, next)=>{

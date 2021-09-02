@@ -20,6 +20,7 @@ function getTimestamp(req, res, next) {
 module.exports = (router)=>{
     router
     .get('/listar', productController.getAllProducts)
+    .get('/listar/cateogry/:categoryId', productController.getCategory)
     .get('/listar/:productId', productController.getProduct)
     .post('/agregar', checkAdmin, getTimestamp, productController.createProduct)
     .patch('/actualizar/:productId', checkAdmin, productController.updateProduct)
