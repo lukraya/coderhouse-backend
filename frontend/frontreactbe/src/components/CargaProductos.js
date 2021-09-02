@@ -4,7 +4,7 @@ const CargaProductos = ()=>{
 
     return( 
                
-        <form id="formulario" action="http://localhost:9000/productos/agregar" method="post" /* onsubmit="return enviarProducto(this)" */>
+        <form id="formulario" action="http://localhost:9000/productos/agregar" method="POST" /* onsubmit="return enviarProducto(this)" */>
             <label htmlFor="name">Nombre: </label>
             <input type="text" id="name" name="name" placeholder="producto 1"/><br/>
             <label htmlFor="price">Precio: </label>

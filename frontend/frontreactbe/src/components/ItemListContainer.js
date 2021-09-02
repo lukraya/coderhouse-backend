@@ -1,23 +1,38 @@
 import {useEffect, useState} from 'react'
+import {useParams} from 'react-router-dom'
+import './styles.css'
+import ItemList from './ItemList'
 
 const ItemListContainer = ({greeting})=>{
-    const [resultFetch, setResultFetch] = useState({})
+    const [items, setItems] = useState({})
+    const {categoryId} = useParams()
 
     useEffect(()=>{
-        requestFetch()
-    }, [])
+        if(categoryId) {
+            getByCategory(categoryId)
+        } else {
+            getProducts()
+        }
+    }, [categoryId])
 
-    const requestFetch = async ()=>{
+    const getByCategory = async (id)=>{
+        const response = await fetch(`http://localhost:9000/productos/listar/cateogry/${id}`)
+        const result = await response.json()
+        //console.log(id)
+        setItems(result)
+    }
+
+    const getProducts = async ()=>{
         const response = await fetch("http://localhost:9000/productos/listar")
         const result = await response.json()
-        console.log(result)
-        setResultFetch(result)    
+        //console.log(result)
+        setItems(result)    
     }
 
     return (
         <>
             <h1>{greeting}</h1>
-            {/* <p>{resultFetch[0].name}</p> */}
+            <ItemList items={items}/>
         </>
     )
 }

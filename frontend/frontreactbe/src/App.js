@@ -1,8 +1,9 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import NavBar from './components/NavBar'
 import ItemListContainer from './components/ItemListContainer'
-import './components/styles.css'
+import ItemDetailContainer from './components/ItemDetailContainer'
 import CargaProductos from './components/CargaProductos'
+import './components/styles.css'
 
 const App = ()=>{
   return (
@@ -16,6 +17,12 @@ const App = ()=>{
           <Route path="/productos/cargar">
             <CargaProductos/>
           </Route>
+          <Route path="/category/:categoryId">
+            <ItemListContainer greeting="Bienvenidos a la tienda"/>
+          </Route>
+          <Route path="/item/:itemId">
+              <ItemDetailContainer/>
+            </Route>
         </Switch>
       </main>
     </BrowserRouter>
