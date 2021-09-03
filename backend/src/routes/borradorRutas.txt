@@ -1,0 +1,21 @@
+localhostblalba
+    api/productos -->checkAdmin
+        cargar (create) -->timestamp
+        actualizar (patch)
+        eliminar (delete)
+        listar (get)
+    productos
+        listar (get)
+        listar id (getId)
+        listar por
+            categoria
+            nombre
+            precio
+            codigo
+            stock
+    carrito
+        agregar (post)
+        listar (get)
+        listar id? (getId)
+        actualizar cant (patch)
+        borrar (delete)

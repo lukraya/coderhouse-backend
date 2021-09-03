@@ -6,7 +6,7 @@ exports.createProduct = async (req, res, next)=>{
     //console.log(req.body)        
     await product.createProduct(req.body)
     //res.json({msg: "Producto creado"})
-    res.redirect('http://localhost:3000/productos/cargar')
+    res.redirect('http://localhost:3000/api/productos/cargar')
 }
 
 exports.getProduct = async (req, res, next)=>{

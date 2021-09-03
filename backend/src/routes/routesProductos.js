@@ -1,30 +1,13 @@
 //const productos = require('./Productos')
 const productController = require('../controller/product')
-const dayjs = require('dayjs')
 
-let admin = true
-
-function checkAdmin(req, res, next) {
-    if(admin) {
-        next()
-    } else {
-        res.send({error: "Acción no autorizada para el usuario"})
-    }
-}
-
-function getTimestamp(req, res, next) {
-    req.body.timestamp = dayjs().format('DD/MM/YYYY HH:mm:ss')
-    next()
-}
 
 module.exports = (router)=>{
     router
-    .get('/listar', productController.getAllProducts)
-    .get('/listar/cateogry/:categoryId', productController.getCategory)
-    .get('/listar/:productId', productController.getProduct)
-    .post('/agregar', checkAdmin, getTimestamp, productController.createProduct)
-    .patch('/actualizar/:productId', checkAdmin, productController.updateProduct)
-    .delete('/borrar/:productId', checkAdmin, productController.deleteProduct)
+    .get('/listar', productController.getAllProducts) //ItemListcontainer
+    .get('/listar/cateogry/:categoryId', productController.getCategory) //ItemListContainer
+    .get('/listar/:productId', productController.getProduct) //ItemDetailContainer
+    
     /* .get('/listar/:productId?', (req, res)=>{
         if (req.params.id) {
             let id = req.params.id
