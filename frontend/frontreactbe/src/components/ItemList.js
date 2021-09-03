@@ -1,6 +1,6 @@
 import React from 'react'
-import './styles.css'
 import Item from './Item'
+import '../styles.css'
 
 const ItemList = ({items})=> {
     //console.log(items)

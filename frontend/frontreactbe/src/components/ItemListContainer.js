@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react'
 import {useParams} from 'react-router-dom'
-import './styles.css'
 import ItemList from './ItemList'
+import '../styles.css'
 
 const ItemListContainer = ({greeting})=>{
     const [items, setItems] = useState({})

@@ -3,7 +3,7 @@ import NavBar from './components/NavBar'
 import ItemListContainer from './components/ItemListContainer'
 import ItemDetailContainer from './components/ItemDetailContainer'
 import CargaProductos from './components/CargaProductos'
-import './components/styles.css'
+import './styles.css'
 
 const App = ()=>{
   return (
@@ -14,13 +14,13 @@ const App = ()=>{
           <Route path="/" exact>
             <ItemListContainer greeting="Bienvenidos a la tienda"/>
           </Route>
-          <Route path="/productos/cargar">
+          <Route path="/api/productos/cargar">
             <CargaProductos/>
           </Route>
           <Route path="/category/:categoryId">
             <ItemListContainer greeting="Bienvenidos a la tienda"/>
           </Route>
-          <Route path="/item/:itemId">
+          <Route path="/:itemId">
               <ItemDetailContainer/>
             </Route>
         </Switch>
