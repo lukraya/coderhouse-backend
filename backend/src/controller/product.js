@@ -1,4 +1,3 @@
-//const product = require('../dao/models/product')
 const ProductService = require('../services/product')
 const product = new ProductService
 
@@ -39,11 +38,14 @@ exports.getCategory = async (req, res, next)=>{
 exports.updateProduct = async (req, res, next)=>{
     const {body, params: {productId}} = req
     const updatedProduct = await product.updateProduct(productId, body)
-    res.json(updatedProduct)
+    //res.json(updatedProduct)
+    res.redirect('http://localhost:3000/api/productos/listar')
 }
 
 exports.deleteProduct = async (req, res, next)=>{
     const {params: {productId}} = req
     await product.deleteProduct(productId)
     res.json({msg: "Producto eliminado"})
+    //error de cors al usar redirect? pero en la función de carga no..
+    //res.redirect('http://localhost:3000/api/productos/listar')
 } 
