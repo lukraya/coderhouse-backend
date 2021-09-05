@@ -14,11 +14,37 @@ module.exports = class {
         return prods
     }
 
+    async getPriceUnder(){
+        let price = await productModel.find({price: {$lt: 60}})
+        return price
+    }
+
+    async getPriceOver(){
+        let price = await productModel.find({price: {$gte: 60}})
+        return price
+    }
+
+    async getByStock(){
+        let stock = await productModel.find({stock: {$gt: 0}})
+        return stock
+    }
+
+    async getByName(prodName){
+        let name = await productModel.find({name: prodName})
+        return name
+    }
+
+    async getByCode(prodCode){
+        let code = await productModel.find({code: prodCode})
+        return code
+    }
+
     async getCategory(categoryId){
         let category = await productModel.find({category: categoryId})
-        //console.log(categoryId)
         return category
     }
+
+    
 
     async updateProduct(id, data){
         const productUpdated = await productModel.findByIdAndUpdate(id, data, {

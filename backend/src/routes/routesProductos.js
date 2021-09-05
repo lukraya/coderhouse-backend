@@ -5,33 +5,13 @@ const productController = require('../controller/product')
 module.exports = (router)=>{
     router
     .get('/listar', productController.getAllProducts) //ItemListcontainer
+    .get('/listar/stock', productController.getByStock) //ItemListContainer
+    .get('/listar/precio/menor', productController.getPriceUnder) //ItemListContainer
+    .get('/listar/precio/mayor', productController.getPriceOver) //ItemListContainer
     .get('/listar/cateogry/:categoryId', productController.getCategory) //ItemListContainer
-    .get('/listar/:productId', productController.getProduct) //ItemDetailContainer
-    
-    /* .get('/listar/:productId?', (req, res)=>{
-        if (req.params.id) {
-            let id = req.params.id
-            res.send(productController.getProduct(id))
-        } else {
-            res.send(productController.getAllProducts)
-        }
-    })
-
-    .post('/agregar', checkAdmin, getTimestamp, (req, res)=>{
-        let toAdd = req.body;
-        res.send({msj: "Producto agregado", producto: productos.nuevoProd(toAdd)})
-    })
-
-    .patch('/actualizar/:id', checkAdmin, getTimestamp, (req, res)=>{
-        let toChange = req.body;
-        let id = req.params.id;
-        res.send({msj: "Producto actualizado", producto: productos.actualizarProducto(toChange, id)})
-    })
-
-    .delete('/borrar/:id', checkAdmin, (req, res)=>{
-        let id = req.params.id;
-        res.send({msj: "Producto eliminado", producto: productos.eliminarProd(id)})
-    }) */
+    .get('/listar/nombre/:prodName', productController.getByName) //ItemListContainer
+    .get('/listar/codigo/:prodCode', productController.getByCode) //ItemListContainer
+    .get('/listar/:productId', productController.getProduct) //ItemDetailContainer    
 
     return router
 }

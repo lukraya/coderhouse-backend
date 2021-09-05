@@ -2,7 +2,6 @@ const ProductService = require('../services/product')
 const product = new ProductService
 
 exports.createProduct = async (req, res, next)=>{
-    //console.log(req.body)        
     await product.createProduct(req.body)
     //res.json({msg: "Producto creado"})
     res.redirect('http://localhost:3000/api/productos/cargar')
@@ -24,11 +23,45 @@ exports.getAllProducts = async (req, res, next)=>{
     res.json(productos)
 }
 
+exports.getPriceUnder = async (req, res, next)=>{
+    const price = await product.getPriceUnder()
+    res.json(price)
+}
+
+exports.getPriceOver = async (req, res, next)=>{
+    const price = await product.getPriceOver()
+    res.json(price)
+}
+
+exports.getByStock = async (req, res, next)=>{
+    const stock = await product.getByStock()
+    res.json(stock)
+}
+
+exports.getByName = async (req, res, next)=>{
+    try {
+        const {params: {prodName}} = req
+        const name = await product.getByName(prodName)
+        res.json(name)
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+exports.getByCode = async (req, res, next)=>{
+    try {
+        const {params: {prodCode}} = req
+        const code = await product.getByCode(prodCode)
+        res.json(code)
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 exports.getCategory = async (req, res, next)=>{
     try {
         const {params: {categoryId}} = req
         const category = await product.getCategory(categoryId)
-        //console.log(categoryId)
         res.json(category)
     } catch (error) {
         console.log(error)
