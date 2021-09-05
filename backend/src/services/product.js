@@ -42,9 +42,7 @@ module.exports = class {
     async getCategory(categoryId){
         let category = await productModel.find({category: categoryId})
         return category
-    }
-
-    
+    }    
 
     async updateProduct(id, data){
         const productUpdated = await productModel.findByIdAndUpdate(id, data, {

@@ -1,5 +1,4 @@
-const carrito = require('./Carrito')
-const productos = require('./Productos')
+const cartController = require('../controller/cart')
 const dayjs = require('dayjs')
 
 function getTimestamp(req, res, next) {
@@ -8,7 +7,13 @@ function getTimestamp(req, res, next) {
 }
 
 module.exports = (router)=>{
-    router.get('/listar/:id?', (req, res)=>{
+    router
+    .post('/agregar', getTimestamp, cartController.createItem)
+    .get('/', cartController.getAllItems)
+    .patch('/actualizar/:itemId', cartController.updateItem)
+    .delete('/borrar/:itemId', cartController.deleteItem)
+
+    /* router.get('/listar/:id?', (req, res)=>{
         if (req.params.id) {
             let id = req.params.id
             res.send(carrito.mostrarProd(id))
@@ -27,7 +32,7 @@ module.exports = (router)=>{
     router.delete('/borrar/:id', (req, res)=>{
         let id = req.params.id;
         res.send({msj: "Producto eliminado", producto: carrito.eliminarProd(id)})
-    })
+    }) */
 
     return router
 }
