@@ -4,8 +4,8 @@ import ItemDetail from './ItemDetail'
 import '../styles.css'
 
 const ItemDetailContainer = ()=> {
-    const [item,setItem] = useState();
-    const {itemId} = useParams();
+    const [item,setItem] = useState()
+    const {itemId} = useParams()
 
     useEffect(()=>{
         getOneProduct(itemId)

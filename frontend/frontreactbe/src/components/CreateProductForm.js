@@ -1,9 +1,9 @@
 import '../styles.css'
 
-const CargaProductos = ()=>{
-
+const CreateProductForm = ()=>{
+    
     return(                
-        <form id="formulario" action="http://localhost:9000/api/productos/agregar" method="POST" /* onsubmit="return enviarProducto(this)" */>
+        <form id="formulario" action="http://localhost:9000/api/productos/agregar" method="POST">
             <label htmlFor="name">Nombre: </label>
             <input type="text" id="name" name="name" placeholder="producto 1"/><br/>
             <label htmlFor="price">Precio: </label>
@@ -23,4 +23,4 @@ const CargaProductos = ()=>{
     )
 }
 
-export default CargaProductos
+export default CreateProductForm
