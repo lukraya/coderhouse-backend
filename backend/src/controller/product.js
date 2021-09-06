@@ -3,7 +3,6 @@ const product = new ProductService
 
 exports.createProduct = async (req, res, next)=>{
     await product.createProduct(req.body)
-    //res.json({msg: "Producto creado"})
     res.redirect('http://localhost:3000/api/productos/cargar')
 }
 
@@ -15,7 +14,6 @@ exports.getProduct = async (req, res, next)=>{
     } catch (error) {
         console.log(`Producto no encontrado. Error: ${error}`)
     }
-    //return product.getProduct(productId)
 }
 
 exports.getAllProducts = async (req, res, next)=>{
@@ -70,8 +68,7 @@ exports.getCategory = async (req, res, next)=>{
 
 exports.updateProduct = async (req, res, next)=>{
     const {body, params: {productId}} = req
-    const updatedProduct = await product.updateProduct(productId, body)
-    //res.json(updatedProduct)
+    await product.updateProduct(productId, body)
     res.redirect('http://localhost:3000/api/productos/listar')
 }
 

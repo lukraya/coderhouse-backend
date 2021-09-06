@@ -2,9 +2,7 @@ const CartService = require('../services/cart')
 const cart = new CartService
 
 exports.createItem = async (req, res, next)=>{
-    //console.log(req.body)
     await cart.createItem(req.body)
-    //res.json({msg: "Cart item creado"})
 }
 
 exports.getAllItems = async (req, res, next)=>{
