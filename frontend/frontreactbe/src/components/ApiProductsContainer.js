@@ -12,7 +12,6 @@ const ApiProductsContainer = ()=>{
     const getAdmin = async ()=>{
         const response = await fetch('http://localhost:9000/api/productos')
         const result = await response.json()
-        //console.log(result.admin)
         setAdmin(result.admin)     
     }
 

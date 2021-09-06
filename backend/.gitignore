@@ -1,4 +1,5 @@
 # dependencies
 /node_modules
+/routes/borradorRutas.txt
 
 .env

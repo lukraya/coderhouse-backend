@@ -12,7 +12,6 @@ const ApiProductsListContainer = ()=>{
     const getItems = async ()=>{
         const response = await fetch('http://localhost:9000/api/productos/listar')
         const result = await response.json()
-        //console.log(result)
         setApiItems(result)
     }
 

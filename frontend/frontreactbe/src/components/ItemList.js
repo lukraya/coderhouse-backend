@@ -3,7 +3,6 @@ import Item from './Item'
 import '../styles.css'
 
 const ItemList = ({items})=> {
-    //console.log(items)
         
     return (
         <>

@@ -20,14 +20,12 @@ const ItemListContainer = ({greeting})=>{
     const getByCategory = async (id)=>{
         const response = await fetch(`http://localhost:9000/productos/cateogry/${id}`)
         const result = await response.json()
-        //console.log(id)
         setItems(result)
     }
 
     const getProducts = async ()=>{
         const response = await fetch("http://localhost:9000/productos/")
         const result = await response.json()
-        //console.log(result)
         setItems(result)    
     }
 

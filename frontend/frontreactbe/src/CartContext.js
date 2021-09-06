@@ -21,20 +21,15 @@ const CartProvider = ({children}) => {
     }
     //Chuequea si el producto ya fue agregado, si no, lo agrega
     const isInCart = (prod)=> {
-        //getItems() //NO BLOQUEA, ASYNC/AWAIT NO SOLUCIONA, NO PONER EN EL INICIO DEL ESTADO, USEEFFECT??
-        //console.log(cart[0].product._id)
-        const existe = cart.find(element => element.product._id === prod.product._id)
+       const existe = cart.find(element => element.product._id === prod.product._id)
         if (!existe) {
-            //setCart(cart => [...cart, prod])
             createItem(prod)
             //setCantidadTotal(cantidadTotal + prod.quantity)
-            //console.log("el producto es nuevo")
         }
         else{alert("El producto ya se encuentra en el carrito.")}
     }    
     //Post a db
     const createItem = async(prod)=>{
-        //console.log(prod.product)
         fetch('http://localhost:9000/carrito/agregar', {
             method: 'post',
             headers: {
@@ -52,24 +47,12 @@ const CartProvider = ({children}) => {
     }
     
     //Remover un item del carrito usando su id
-    const removeItem = (itemId, /* quantity */)=> {
-        //console.log(itemId)
+    const removeItem = (itemId)=> {
         fetch(`http://localhost:9000/carrito/borrar/${itemId}`, {
             method: 'delete'
         })
         getItems()
-        //quitarItem(itemId, quantity, borrarItem)
     }
-    //Obsoletas de momento
-    /* const quitarItem = (itemId, quantity, callback)=> {
-        const index = cart.findIndex(element => element.product._id === itemId)
-        callback(index, quantity)
-    }
-    const borrarItem = (index, quantity)=> {
-        cart.splice(index, 1)
-        setCart(cart)
-        setCantidadTotal(cantidadTotal - quantity)
-    } */    
 
     //Remover todos los items
     /* const clear = ()=> {

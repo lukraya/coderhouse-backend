@@ -4,7 +4,6 @@ import ApiProductItem from "./ApiProductItem"
 const ApiProductsList = ({apiItems})=>{
 
     const deleteProduct = (id)=>{
-        //console.log(`delete ${id}`)
         fetch(`http://localhost:9000/api/productos/borrar/${id}`, {
             method: 'delete'
         })

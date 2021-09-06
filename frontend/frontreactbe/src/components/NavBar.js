@@ -5,12 +5,10 @@ import { contexto } from '../CartContext'
 import '../styles.css'
 
 const NavBar = () => {
-    //PROBAR: TRAER GETITEMS Y EJECUTAR ACÁ EN EFECTO
     const {cart, getItems} = useContext(contexto)
     
     useEffect(()=>{
         getItems()
-        //console.log(cart)
     })
     
     return (

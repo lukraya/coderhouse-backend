@@ -14,7 +14,6 @@ const ItemDetailContainer = ()=> {
     const getOneProduct = async (id)=>{
         const response = await fetch(`http://localhost:9000/productos/${id}`)
         const result = await response.json()
-        //console.log(id)
         setItem(result)
     }
 

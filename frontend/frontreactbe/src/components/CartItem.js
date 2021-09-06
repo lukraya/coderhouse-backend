@@ -42,7 +42,7 @@ const CartItem = ({item})=> {
                 <button onClick={onSumar} className="controles">+</button>
             </p>
             <p>Subtotal: ${subtotal}</p>
-            <button onClick={()=>removeItem(_id, /* quantity */)}>Quitar del carrito</button>
+            <button onClick={()=>removeItem(_id)}>Quitar del carrito</button>
         </div>
     )
 }
