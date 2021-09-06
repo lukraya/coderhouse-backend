@@ -2,8 +2,9 @@ const CartService = require('../services/cart')
 const cart = new CartService
 
 exports.createItem = async (req, res, next)=>{
+    //console.log(req.body)
     await cart.createItem(req.body)
-    res.json({msg: "Cart item creado"})
+    //res.json({msg: "Cart item creado"})
 }
 
 exports.getAllItems = async (req, res, next)=>{
@@ -13,6 +14,7 @@ exports.getAllItems = async (req, res, next)=>{
 
 exports.updateItem = async (req, res, next)=>{
     const {body, params: {cartId}} = req
+    console.log(body)
     const updatedItem = await cart.updateItem(cartId, body)
     res.json(updatedItem)
 }

@@ -2,7 +2,7 @@
 const express = require('express')
 const routesApi = require('./routes/routesApi')
 const routesProductos = require('./routes/routesProductos')
-const routesCarrito = require('./routesCarrito')
+const routesCarrito = require('./routes/routesCarrito')
 const cors = require('cors')
 const compression = require('compression')
 

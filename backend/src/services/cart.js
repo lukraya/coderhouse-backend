@@ -18,6 +18,6 @@ module.exports = class {
     }
 
     async deleteItem(id){
-        await caartModel.findByIdAndDelete(id)
+        await cartModel.findByIdAndDelete(id)
     }
 }
