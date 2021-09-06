@@ -1,12 +1,18 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import CartWidget from './CartWidget'
 import { contexto } from '../CartContext'
 import '../styles.css'
 
 const NavBar = () => {
-    const {cart} = useContext(contexto)
-
+    //PROBAR: TRAER GETITEMS Y EJECUTAR ACÁ EN EFECTO
+    const {cart, getItems} = useContext(contexto)
+    
+    useEffect(()=>{
+        getItems()
+        //console.log(cart)
+    })
+    
     return (
         <nav>
             <NavLink to="/" exact id="brand">Coder Kiosco</NavLink>

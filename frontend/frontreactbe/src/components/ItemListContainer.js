@@ -18,41 +18,41 @@ const ItemListContainer = ({greeting})=>{
     }, [categoryId])
 
     const getByCategory = async (id)=>{
-        const response = await fetch(`http://localhost:9000/productos/listar/cateogry/${id}`)
+        const response = await fetch(`http://localhost:9000/productos/cateogry/${id}`)
         const result = await response.json()
         //console.log(id)
         setItems(result)
     }
 
     const getProducts = async ()=>{
-        const response = await fetch("http://localhost:9000/productos/listar")
+        const response = await fetch("http://localhost:9000/productos/")
         const result = await response.json()
         //console.log(result)
         setItems(result)    
     }
 
     const getByName = async (name)=>{
-        const response = await fetch(`http://localhost:9000/productos/listar/nombre/${name}`)
+        const response = await fetch(`http://localhost:9000/productos/nombre/${name}`)
         const result = await response.json()
         setItems(result)
     }
     const getByCode = async (code)=>{
-        const response = await fetch(`http://localhost:9000/productos/listar/codigo/${code}`)
+        const response = await fetch(`http://localhost:9000/productos/codigo/${code}`)
         const result = await response.json()
         setItems(result)
     }
     const getByStock = async ()=>{
-        const response = await fetch(`http://localhost:9000/productos/listar/stock`)
+        const response = await fetch(`http://localhost:9000/productos/stock`)
         const result = await response.json()
         setItems(result)
     }
     const getPriceUnder = async ()=>{
-        const response = await fetch(`http://localhost:9000/productos/listar/precio/menor`)
+        const response = await fetch(`http://localhost:9000/productos/precio/menor`)
         const result = await response.json()
         setItems(result)
     }
     const getPriceOver = async ()=>{
-        const response = await fetch(`http://localhost:9000/productos/listar/precio/mayor`)
+        const response = await fetch(`http://localhost:9000/productos/precio/mayor`)
         const result = await response.json()
         setItems(result)
     }
