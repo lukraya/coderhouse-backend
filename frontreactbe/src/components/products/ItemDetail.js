@@ -1,8 +1,8 @@
 import React, {useContext, useState} from 'react'
 import { NavLink } from 'react-router-dom'
-import { contexto } from '../CartContext'
+import { contexto } from '../../CartContext'
 import ItemCounter from './ItemCounter'
-import '../styles.css'
+import '../../styles.css'
 
 const ItemDetail = ({item})=>{
     const [stock,setStock] = useState(item.stock)

@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react'
-import { contexto } from '../CartContext'
+import { contexto } from '../../CartContext'
 import Order from './Order'
 
 const Checkout = () => {
