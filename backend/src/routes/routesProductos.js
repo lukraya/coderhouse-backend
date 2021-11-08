@@ -1,16 +1,17 @@
-const productController = require('../controller/product')
+const { getAllProducts, getByStock, getPriceOver, getPriceUnder, getCategory,
+     getByName, getByCode, getProduct } = require('../controller/product')
 
 
 module.exports = (router)=>{
     router
-    .get('/', productController.getAllProducts) //ItemListcontainer
-    .get('/stock', productController.getByStock) //ItemListContainer
-    .get('/precio/menor', productController.getPriceUnder) //ItemListContainer
-    .get('/precio/mayor', productController.getPriceOver) //ItemListContainer
-    .get('/cateogry/:categoryId', productController.getCategory) //ItemListContainer
-    .get('/nombre/:prodName', productController.getByName) //ItemListContainer
-    .get('/codigo/:prodCode', productController.getByCode) //ItemListContainer
-    .get('/:productId', productController.getProduct) //ItemDetailContainer    
+    .get('/', getAllProducts) //ItemListcontainer
+    .get('/stock', getByStock) //ItemListContainer
+    .get('/precio/menor', getPriceUnder) //ItemListContainer
+    .get('/precio/mayor', getPriceOver) //ItemListContainer
+    .get('/cateogry/:categoryId', getCategory) //ItemListContainer
+    .get('/nombre/:prodName', getByName) //ItemListContainer
+    .get('/codigo/:prodCode', getByCode) //ItemListContainer
+    .get('/:productId', getProduct) //ItemDetailContainer    
 
     return router
 }

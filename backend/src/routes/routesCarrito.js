@@ -1,4 +1,4 @@
-const cartController = require('../controller/cart')
+const { createItem, getAllItems, updateItem, deleteItem } = require('../controller/cart')
 const dayjs = require('dayjs')
 
 function getTimestamp(req, res, next) {
@@ -12,10 +12,10 @@ function setHeaders(req, res, next) {
 
 module.exports = (router)=>{
     router
-    .post('/agregar', getTimestamp, cartController.createItem) //ItemCounter-CartContext
-    .get('/', cartController.getAllItems) //NavBar-CartContext
-    .patch('/actualizar/:cartId', /* setHeaders, */ cartController.updateItem) //CartItem -- CORS ERROR-POSTMAN OK
-    .delete('/borrar/:cartId', cartController.deleteItem) //CartItem
+    .post('/agregar', getTimestamp, createItem) //ItemCounter-CartContext
+    .get('/', getAllItems) //NavBar-CartContext
+    .patch('/actualizar/:cartId', /* setHeaders, */ updateItem) //CartItem -- CORS ERROR-POSTMAN OK
+    .delete('/borrar/:cartId', deleteItem) //CartItem
 
     return router
 }

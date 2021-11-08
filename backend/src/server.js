@@ -6,6 +6,7 @@ const express = require('express')
 const app = express()
 const server = http.createServer(app)
 
+const routerAuth = express.Router()
 const routerApi = express.Router()
 const routerProductos = express.Router()
 const routerCarrito = express.Router()
@@ -17,7 +18,7 @@ const mongoOptions = {useNewUrlParser: true, useUnifiedTopology: true}
 //Authentication
 const passport = require('passport')
 const session = require("express-session")
-require('./src/auth/passportLocal')
+require('./auth/passportLocal')
 
 //Require middlewares
 const cookieParser = require('cookie-parser')
@@ -50,6 +51,8 @@ app.use(compression())
 
 
 //Las rutas después de json o urlencoded!!
+const routesAuth = require('./routes/routesAuth')
+app.use('/auth', routesAuth(routerAuth))
 const routesApi = require('./routes/routesApi')
 app.use('/api/productos', routesApi(routerApi))
 const routesProductos = require('./routes/routesProductos')
