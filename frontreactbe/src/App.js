@@ -9,7 +9,12 @@ import Checkout from './components/cart/Checkout'
 import CreateProductForm from './components/api/CreateProductForm'
 //import ApiProductsListContainer from './components/ApiProductsListContainer'
 import UpdateProductForm from './components/api/UpdateProductForm'
+import SignupForm from './components/auth/SignupForm'
+import SignupFailure from './components/auth/SignupFailure'
+import LoginFailure from './components/auth/LoginFailure'
+import LoginForm from './components/auth/LoginForm'
 import './styles.css'
+
 
 
 const App = ()=>{
@@ -21,6 +26,18 @@ const App = ()=>{
           <Switch>
             <Route path="/" exact>
               <ItemListContainer greeting="Bienvenidos a la tienda"/>
+            </Route>
+            <Route path="/signup">
+              <SignupForm/>
+            </Route>
+            <Route path="/signup-failed">
+              <SignupFailure/>
+            </Route>
+            <Route path="/login">
+              <LoginForm/>
+            </Route>
+            <Route path="/login-failed">
+              <LoginFailure/>
             </Route>
             {/* <Route path="/api/productos" exact>
               <ApiProductsContainer/>
