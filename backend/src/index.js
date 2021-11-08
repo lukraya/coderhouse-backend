@@ -1,11 +1,12 @@
 //INICIALIZACIÓN DEL SERVIDOR
 const {PORT} = require('./config/globals')
 const {getConnection} = require('./dao/db/connection')
-const app = require('./server')
+const server = require('./server')
 
 getConnection().then((message)=>{
     console.log(message)
-    app.listen(PORT, ()=>{
-        console.log(`Listening on port: ${PORT}`)
+    server.listen(PORT, ()=>{
+        if (err) {console.log(err)}
+        else {console.log(`Server listening on PORT ${PORT}`)}
     })
 }).catch(console.log)
