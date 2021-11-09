@@ -15,10 +15,11 @@ const NavBar = () => {
     })
 
     const getUserType = async ()=>{
-        const response = await fetch('http://localhost:9000/auth/userType')
+        const response = await fetch('http://localhost:9000/auth/userType', 
+                {credentials: 'include'})
         const result = await response.json()
         console.log(result)
-        setUserType(result)
+        setUserType(result)        
     }
 
     const renderMenu = ()=>{

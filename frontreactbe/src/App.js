@@ -14,6 +14,7 @@ import SignupFailure from './components/auth/SignupFailure'
 import LoginFailure from './components/auth/LoginFailure'
 import LoginForm from './components/auth/LoginForm'
 import './styles.css'
+import Logout from './components/auth/Logout'
 
 
 
@@ -38,6 +39,9 @@ const App = ()=>{
             </Route>
             <Route path="/login-failed">
               <LoginFailure/>
+            </Route>
+            <Route path="/logout">
+              <Logout/>
             </Route>
             {/* <Route path="/api/productos" exact>
               <ApiProductsContainer/>
