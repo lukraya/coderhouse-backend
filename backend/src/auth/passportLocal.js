@@ -65,8 +65,7 @@ const signupVerifyCallback = (req, email, password, done)=>{
 const signupStrategy = new LocalStrategy(
     {passReqToCallback: true,
     usernameField: 'email',
-    passwordField: 'password',
-    passReqTodone: true},
+    passwordField: 'password'},
     signupVerifyCallback
 )
 
@@ -74,9 +73,11 @@ passport.use('signup', signupStrategy)
 
 
 passport.serializeUser((user, done)=>{
-    done(null, user._id)
+    //console.log(`serialize ${user.id}`)
+    done(null, user.id)
 })
 passport.deserializeUser((id, done)=>{
+    //console.log(`deserialize ${id}`)
     userModel.findById(id, (err, user)=>{
         done(err, user)
     })
