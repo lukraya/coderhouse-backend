@@ -1,25 +1,23 @@
-import React, { /* useContext, */ useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 //import CartWidget from './CartWidget'
-//import { contexto } from '../CartContext'
+import { contexto } from '../CartContext'
 import '../styles.css'
 
 const NavBar = () => {
     const [userType, setUserType] = useState('none')
-    //const {cart, getItems} = useContext(contexto)
-    
-    
+    const {/* cart, getItems, */ getUser} = useContext(contexto)
+        
     useEffect(()=>{
         getUserType()
         //getItems()
     })
 
     const getUserType = async ()=>{
-        const response = await fetch('http://localhost:9000/auth/userType', 
-                {credentials: 'include'})
-        const result = await response.json()
-        console.log(result)
-        setUserType(result)        
+        const res = await getUser()
+        //console.log(res)
+        //console.log(res.name)
+        setUserType(res.name)        
     }
 
     const renderMenu = ()=>{

@@ -22,7 +22,7 @@ const CartItem = ({item})=> {
 
     const updateQuantity = async (cant)=>{
         fetch(`http://localhost:9000/carrito/actualizar/${_id}`, {
-            method: 'patch',
+            method: 'PATCH',
             mode: 'cors',
             headers: {
                 'Content-Type': 'application/json',                             
