@@ -40,13 +40,22 @@ app.use(
         }
     })
 )
+
+//Cors config
+const corsOptions = {
+    origin: 'http://localhost:3000',
+    credentials: true,
+    preflightContinue: true,
+    optionsSuccessStatus: 200
+}
+app.options('*', cors())
 //Setting middlewares
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(cookieParser())
-app.use(cors({credentials: true, origin: 'http://localhost:3000'}))
+app.use(cors(corsOptions))
 app.use(compression())
 
 

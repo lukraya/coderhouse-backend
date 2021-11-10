@@ -7,6 +7,7 @@ const userSchema = new Schema({
     cellphone: String,
     avatar: String,
     email: String,
+    cart: Array,
     hash: String,
     salt: String
 }, {collection: 'usuarios'})

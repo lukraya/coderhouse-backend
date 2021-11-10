@@ -1,35 +1,26 @@
-let userType = 'none'
-
-exports.logUser = async (req, res, next)=>{
-    //console.log(`session ${req.session.passport.user}`)
-    //console.log(`user ${req.user}`)
-    userType = req.user.name
-
-    res.redirect('http://localhost:3000')
-}
+let user = {name: 'none'}
 
 exports.logout = async (req, res, next)=>{
     //console.log(`logout? ${req.user}`)
-    
     req.logout()
     if (!req.user) {
-        userType = 'none'
-    }
-   
+       user = {name: 'none'}
+    }   
     //console.log(`nothing? ${req.user}`)
     res.json({msj: 'logged out!'})
 }
 
-exports.getUserType = async (req, res, next)=>{
-    //console.log(`en usertype: ${userType}`)
-    //console.log(`en usertype: ${req.session.passport.user}`)
-    //console.log(`user? ${req.user}`)
+exports.getUser = async (req, res, next)=>{
     if (req.user) {
-        userType = req.user.name
+        user = req.user
     }
-    res.json(userType)
+    res.json(user)
 }
+/* exports.logUser = async (req, res, next)=>{
+    userType = req.user.name
 
+    res.redirect('http://localhost:3000')
+} */
 /* exports.getSignup = async (req, res, next)=>{
     res.send('Viste de signup')
 } */
