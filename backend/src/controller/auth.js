@@ -1,19 +1,24 @@
-let user = {name: 'none'}
+//let user = {name: 'none'}
 
 exports.logout = async (req, res, next)=>{
     //console.log(`logout? ${req.user}`)
     req.logout()
-    if (!req.user) {
+    /* if (!req.user) {
        user = {name: 'none'}
-    }   
+    }  */  
     //console.log(`nothing? ${req.user}`)
     res.json({msj: 'logged out!'})
 }
 
 exports.getUser = async (req, res, next)=>{
+    //console.log(req.user)
+    let user
     if (req.user) {
         user = req.user
+    } else {
+        user = 'none'
     }
+    
     res.json(user)
 }
 /* exports.logUser = async (req, res, next)=>{

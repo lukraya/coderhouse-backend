@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose')
+const cartSchema = require('./cart')
 
 const userSchema = new Schema({
     name: String,
@@ -7,7 +8,7 @@ const userSchema = new Schema({
     cellphone: String,
     avatar: String,
     email: String,
-    cart: Array,
+    cart: [cartSchema],
     hash: String,
     salt: String
 }, {collection: 'usuarios'})

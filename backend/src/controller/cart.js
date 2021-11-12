@@ -15,25 +15,30 @@ exports.addItem = async (req, res, next)=>{
         const result = await userModel.findByIdAndUpdate(userId, {cart: cartProds}, (doc)=>{
             return doc
         })
-        console.log(result)
+        //console.log(result)
         res.json({msj: 'success'})
     } catch (error) {
-        console.log(error)
+        //console.log(error)
         res.json({msj: 'error'})
     }
-
-    res.status(200).send('sad')
+    
     //await cart.createItem(req.body)
 }
 
 exports.getAllItems = async (req, res, next)=>{
     if (req.user) {
-        console.log(req.user)
-        const user = await userModel.findById(req.user._id)
-        console.log(user.cart)
-        cartProds = user.cart
+        try {
+            //console.log(req.user)
+            const user = await userModel.findById(req.user._id)
+            //console.log(user.cart)
+            cartProds = user.cart
 
-        res.json(cartProds)
+            res.json(cartProds)
+
+            //Me sale un error de "query already executed", pero el prod se agrega correctamente
+        } catch (error) {
+            console.log(error)    
+        }
     }
 
     /* const items = await cart.getAllItems()

@@ -15,6 +15,7 @@ const cartSchema = new Schema({
         category: String,
         timestamp: String
     }
-}, {collection: 'carrito'})
+}/* , {collection: 'carrito'} */)
 
-module.exports = model('Cart', cartSchema)
+//module.exports = model('Cart', cartSchema)
+module.exports = cartSchema
