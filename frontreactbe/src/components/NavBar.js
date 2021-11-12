@@ -1,34 +1,35 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
-//import CartWidget from './CartWidget'
+import CartWidget from './cart/CartWidget'
 import { contexto } from '../CartContext'
 import '../styles.css'
 
 const NavBar = () => {
-    const [userType, setUserType] = useState('none')
-    const {/* cart, getItems, */ getUser} = useContext(contexto)
+    //const [userType, setUserType] = useState('none')
+    const {cart, getCart, getUser, user} = useContext(contexto)
         
     useEffect(()=>{
-        getUserType()
+        getUser()
+        //getUserType()
         //getItems()
     })
 
-    const getUserType = async ()=>{
+    /* const getUserType = async ()=>{
         const res = await getUser()
         //console.log(res)
         //console.log(res.name)
-        setUserType(res.name)        
-    }
+        //setUserType(res.name)        
+    } */
 
     const renderMenu = ()=>{
-        if (userType === 'none') {
+        if (user === 'none') {
             return (
                 <>
                     <li className="categorias"><NavLink to="/login">Log in</NavLink></li>
                     <li className="categorias"><NavLink to="/signup">Sign up</NavLink></li>
                 </>
             )
-        } else if (userType === 'admin') {
+        } else if (user.name === 'admin') {
             return (
                 <>
                     <li className="categorias"><NavLink to="/nuevo-producto">Cargar</NavLink></li>
@@ -39,7 +40,9 @@ const NavBar = () => {
             return (
                 <>
                     <li className="categorias"><NavLink to="/perfil">Mi Perfil</NavLink></li>
-                    <li className="categorias"><NavLink to="/carrito">Mi Carrito</NavLink></li>
+                    {/* <li className="categorias"><NavLink to="/carrito">Mi Carrito</NavLink></li> */}
+                    {/* {cart.length > 0 ? <CartWidget/> : null} */}
+                    <CartWidget/>
                     <li className="categorias"><NavLink to="/logout">Log out</NavLink></li>
                 </>
             )
@@ -57,7 +60,6 @@ const NavBar = () => {
                     <li className="categorias"><NavLink to="/category/Galletitas">Galletitas</NavLink></li>
                     <li className="categorias"><NavLink to="/category/Alfajores">Alfajores</NavLink></li> */}
                 </ul>
-                {/* {cart.length > 0 ? <CartWidget/> : null} */}
             </div>
         </nav>
     )

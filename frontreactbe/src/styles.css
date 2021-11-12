@@ -78,12 +78,12 @@ a:hover {
 #itemCount {
     margin-left: 10px;
 }
-#seleccionCant {
+.seleccionCant {
     display: flex;
     justify-content: space-between;
     width: 150px;
 }
-#seleccionCant p {
+.seleccionCant p {
     margin: 0;
 }
 #agregar {

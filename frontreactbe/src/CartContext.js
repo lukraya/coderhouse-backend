@@ -4,20 +4,43 @@ const contexto = createContext()
 const {Provider} = contexto
 
 const CartProvider = ({children}) => {
-    //const [user, setUser] = useState({})
+    const [user, setUser] = useState('none')
     const [cart, setCart] = useState([])
-    //const [cantidadTotal, setCantidadTotal] = useState(0)
+    const [cantidadTotal, setCantidadTotal] = useState(0)
     //Queda hacer una función que sume las cantidades de los items en cart, traidos de la db
     //Probablemente algo como preciototal()
 
+    //Trae el user
     const getUser = async ()=>{
         const response = await fetch('http://localhost:9000/auth/user', 
                 {credentials: 'include'})
+        //console.log(response)
         const result = await response.json()
         //console.log(result)
-        return result
+        if (result._id !== user._id) {
+            console.log('resultId distinta de userId')
+            setUser(result)  //después de esto recarga, ergo no llega a hacer nada que venga después en el bloque  
+        }
+        if (user !== 'none' && user.name !== 'admin') {
+            console.log('tengo user y seteo cart')
+            setCart(user.cart)
+            //console.log(cart)
+        }
+
+       
+
+        /* try {
+                       
+        } catch (error) {
+            console.log(`invalid json: undefined`)
+            if (user !== undefined) {
+
+            }
+        } */
+        //return result
     }
 
+    //Trae user.cart
     const getCart = async ()=>{
         const response = await fetch('http://localhost:9000/carrito/listar',
                 {credentials: 'include'})
@@ -68,6 +91,9 @@ const CartProvider = ({children}) => {
         }) */
     }
 
+
+    
+
     //Buscar en la db
     const getItems = async()=>{
         const response = await fetch('http://localhost:9000/carrito')
@@ -90,13 +116,13 @@ const CartProvider = ({children}) => {
     } */
 
     //Sumar todos los subtotales
-    const precioTotal = ()=>{
-        return cart.reduce((suma, producto)=>suma + producto.subtotal, 0)
+    const precioTotal = (array)=>{
+        return array.reduce((suma, producto)=>suma + producto.subtotal, 0)
     }
 
 
     return (
-        <Provider value={{cart, /* cantidadTotal, */ getItems, addItem, removeItem, /* clear, */ precioTotal, getUser, getCart}}>
+        <Provider value={{cart, user, cantidadTotal, getItems, addItem, removeItem, /* clear, */ precioTotal, getUser, getCart}}>
             {children}
         </Provider>
     )

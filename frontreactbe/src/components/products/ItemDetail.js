@@ -43,7 +43,7 @@ const ItemDetail = ({item})=>{
             <img src={item.thumbnail} alt="Imagen de producto" height="70px" width="70px"></img><br/>
             {cantItem ? 
                 <>
-                    <button><NavLink to="/cart">Terminar mi compra</NavLink></button>
+                    <button><NavLink to="/carrito">Terminar mi compra</NavLink></button>
                     <button><NavLink to="/">Seguir comprando</NavLink></button>
                 </>
                 : <ItemCounter onAdd={onAdd} onSumar={onSumar} onRestar={onRestar} count={count}/>

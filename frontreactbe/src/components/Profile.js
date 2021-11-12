@@ -12,8 +12,14 @@ const Profile = () => {
 
     const getUserData = async ()=>{
         const res = await getUser()
-        setUserData(res)
-        //recarga continua/infinito console.log ;_;
+        console.log(`res en perfil, name ${res.name}`)
+        if (!userData.name) {
+            console.log(`seteo la info`)
+            setUserData(res)
+        } else {
+            console.log(`ya tengo la info`)
+        }
+        //Solución imperfecta (carga unas 2 veces)
     }
 
     return (

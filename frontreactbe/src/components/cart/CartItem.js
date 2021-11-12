@@ -36,7 +36,7 @@ const CartItem = ({item})=> {
             <h4>{product.name}</h4>
             <img src={product.thumbnail} alt={product.name} height="70px" width="70px"></img>
             <p>Precio: ${product.price}</p>
-            <p>Cantidad: 
+            <p className="seleccionCant">Cantidad: 
                 <button onClick={onRestar} className="controles">-</button>
                 {count}
                 <button onClick={onSumar} className="controles">+</button>
