@@ -1,15 +1,14 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, /* useState */ } from 'react'
 import { NavLink } from 'react-router-dom'
 import { contexto } from '../../CartContext'
 import CartItem from './CartItem'
 
 const Cart = () => {
-  const [items,setItems] = useState([])
-  const {cart, precioTotal, /* clear */ /* getCart */ } = useContext(contexto)
+  const {cart, precioTotal, clear, getCart } = useContext(contexto)
+  //const [items,setItems] = useState([])
 
   useEffect(()=>{
-    console.log(cart)
-    //getCartItems()
+    getCart()
   })
 
   /* const getCartItems = async ()=>{
@@ -30,12 +29,12 @@ const Cart = () => {
   
   return (
     <div className="cart">
-      {items.length > 0 ?
+      {cart.length > 0 ?
       <>
-          {items.map(item=>{return <CartItem key={item.product._id} item={item}/>})}
-          <p>Total: ${precioTotal(items)}</p>
-          {/* <button onClick={clear} className="botonCart">Vaciar el carrito</button>
-          <button><NavLink to="/checkout" className="botonCart">Comprar</NavLink></button> */}
+          {cart.map(item=>{return <CartItem key={item.product._id} item={item}/>})}
+          <p>Total: ${precioTotal(cart)}</p>
+          <button onClick={clear} className="botonCart">Vaciar el carrito</button>
+          <button><NavLink to="/checkout" className="botonCart">Comprar</NavLink></button>
       </>
       : <>
           <p>Su carrito está vacío.</p>

@@ -9,7 +9,7 @@ const CartProvider = ({children}) => {
     const [cantidadTotal, setCantidadTotal] = useState(0)
     //Queda hacer una función que sume las cantidades de los items en cart, traidos de la db. Probablemente algo como preciototal()
 
-    //Trae el user
+    //Trae el user --- NO setear acá cart: pisa otros setCart con data desactualizada. Será por cache de la req?
     const getUser = async ()=>{
         const response = await fetch('http://localhost:9000/auth/user', 
                 {credentials: 'include'})
@@ -17,14 +17,15 @@ const CartProvider = ({children}) => {
         const result = await response.json()
         //console.log(result)
         if (result._id !== user._id) {
-            console.log('resultId distinta de userId')
+            console.log('resultId distinta de userId, setUser')
             setUser(result)  //después de esto recarga, ergo no llega a hacer nada que venga después en el bloque  
         }
-        if ((user !== 'none') && (user.name !== 'admin')) { //tal vez no hacen falta los paréntesis, pero por ahora quedan
+        /* if ((user !== 'none') && (user.name !== 'admin')) { //tal vez no hacen falta los paréntesis, pero por ahora quedan
             console.log('tengo user y seteo cart')
             setCart(user.cart)
+            //me está trayendo un cart desactualizado, distinto a la bd. Cache de la petición??
             //console.log(cart)
-        }       
+        }  */     
 
         /* try {
                        
@@ -37,15 +38,7 @@ const CartProvider = ({children}) => {
         //return result
     }
 
-    //Trae user.cart
-    /* const getCart = async ()=>{
-        const response = await fetch('http://localhost:9000/carrito/listar',
-                {credentials: 'include'})
-        const result = await response.json()
-        console.log(result)
-        return result
-    } */
-
+    
     //Recibe información de ItemDetail
     const addItem = (objetoItem, quantity)=> {
         crearProducto(objetoItem, quantity, isInCart)        
@@ -105,29 +98,54 @@ const CartProvider = ({children}) => {
         }) */
     }
 
-
-    
-
-    //Buscar en la db
-    const getItems = async()=>{
-        const response = await fetch('http://localhost:9000/carrito')
+    //Remover todos los items
+    const clear = async ()=> {
+        const response = await fetch(`http://localhost:9000/carrito/borrar/`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                userId: user._id
+            })
+        })
         const result = await response.json()
+        //console.log(result)
+        if (result.msj === 'success') {
+            setCart([])
+        } else { alert('Hubo un error!') }
+    }
+
+    //Trae user.cart
+    const getCart = async ()=>{
+        const response = await fetch('http://localhost:9000/carrito/listar',
+                {credentials: 'include'})
+        const result = await response.json()
+        //console.log(result)
         setCart(result)
     }
     
+
+    //Buscar en la db
+    /* const getItems = async()=>{
+        const response = await fetch('http://localhost:9000/carrito')
+        const result = await response.json()
+        setCart(result)
+    } */
+    
     //Remover un item del carrito usando su id
-    const removeItem = (itemId)=> {
-        fetch(`http://localhost:9000/carrito/borrar/${itemId}`, {
-            method: 'delete'
+    const removeItemCart = async (itemId)=> {
+        //console.log(`remove`)
+        const response = await fetch(`http://localhost:9000/carrito/borrar/${itemId}`, {
+            method: 'delete',
+            credentials: 'include'
         })
-        getItems()
+        const result = await response.json()
+        setCart(result)
+        //getItems()
     }
 
-    //Remover todos los items
-    /* const clear = ()=> {
-        setCart([])
-        setCantidadTotal(0)
-    } */
+    
 
     //Sumar todos los subtotales
     const precioTotal = (array)=>{
@@ -136,7 +154,7 @@ const CartProvider = ({children}) => {
 
 
     return (
-        <Provider value={{cart, user, cantidadTotal, getItems, addItem, removeItem, /* clear, */ precioTotal, getUser,/*  getCart */}}>
+        <Provider value={{cart, user, cantidadTotal, /* getItems, */ addItem, removeItemCart, clear, precioTotal, getUser, getCart}}>
             {children}
         </Provider>
     )
