@@ -2,7 +2,7 @@ const { addItem, getAllItems, updateItem, deleteItem } = require('../controller/
 const dayjs = require('dayjs')
 
 function getTimestamp(req, res, next) {
-    req.body.item.timestamp = dayjs().format('DD/MM/YYYY HH:mm:ss')
+    req.body.prod.timestamp = dayjs().format('DD/MM/YYYY HH:mm:ss')
     next()
 }
 function setHeaders(req, res, next) {    
@@ -13,7 +13,8 @@ function setHeaders(req, res, next) {
 
 module.exports = (router)=>{
     router
-    .patch('/agregar/:userId', /* setHeaders, */ getTimestamp, addItem) //ItemCounter-CartContext
+    .post('/agregar', getTimestamp, addItem)
+    //.patch('/agregar/:userId', /* setHeaders, */ getTimestamp, addItem) //ItemCounter-CartContext
     .get('/listar', getAllItems) //NavBar-CartContext
     
     

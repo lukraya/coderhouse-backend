@@ -2,16 +2,31 @@ const CartService = require('../services/cart')
 const cart = new CartService
 const userModel = require('../dao/models/user')
 //Puede que técnicamente esta variable sea una práctica muy poco correcta
-let cartProds = []
+//let cartProds = []
 
 exports.addItem = async (req, res, next)=>{
     //console.log(req.body)
-    const { item, userId } = req.body
-    cartProds.push(item)
+    const { prod, userId } = req.body
+    //cartProds.push(item)
     //console.log(cartProds)
     //console.log(userId)
-
     try {
+        const user = await userModel.findById(userId)
+        //console.log(user)
+        user.cart.push(prod)
+        //console.log(user.cart)
+        user.save((err)=>{
+            if (err) console.log(`error saving doc`)
+            console.log('success')
+        })
+
+        res.json(user.cart)
+
+    } catch (error) {
+        console.log(`error al agregar item a cart`)
+    }
+
+    /* try {
         const result = await userModel.findByIdAndUpdate(userId, {cart: cartProds}, (doc)=>{
             return doc
         })
@@ -20,7 +35,7 @@ exports.addItem = async (req, res, next)=>{
     } catch (error) {
         //console.log(error)
         res.json({msj: 'error'})
-    }
+    } */
     
     //await cart.createItem(req.body)
 }
