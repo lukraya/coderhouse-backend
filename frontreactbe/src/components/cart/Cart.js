@@ -5,13 +5,14 @@ import CartItem from './CartItem'
 
 const Cart = () => {
   const [items,setItems] = useState([])
-  const {/* cart, */ precioTotal, /* clear */ getCart } = useContext(contexto)
+  const {cart, precioTotal, /* clear */ /* getCart */ } = useContext(contexto)
 
   useEffect(()=>{
-    getCartItems()
+    console.log(cart)
+    //getCartItems()
   })
 
-  const getCartItems = async ()=>{
+  /* const getCartItems = async ()=>{
     const res = await getCart()
     //console.log(JSON.stringify(res))
     console.log(items)
@@ -25,7 +26,7 @@ const Cart = () => {
       console.log(`ya tenía estos items`)
     }
     //Solución no perfecta, pero ya no se recarga infinitamente
-  }
+  } */
   
   return (
     <div className="cart">

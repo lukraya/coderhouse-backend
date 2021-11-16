@@ -7,8 +7,7 @@ const CartProvider = ({children}) => {
     const [user, setUser] = useState('none')
     const [cart, setCart] = useState([])
     const [cantidadTotal, setCantidadTotal] = useState(0)
-    //Queda hacer una función que sume las cantidades de los items en cart, traidos de la db
-    //Probablemente algo como preciototal()
+    //Queda hacer una función que sume las cantidades de los items en cart, traidos de la db. Probablemente algo como preciototal()
 
     //Trae el user
     const getUser = async ()=>{
@@ -21,13 +20,11 @@ const CartProvider = ({children}) => {
             console.log('resultId distinta de userId')
             setUser(result)  //después de esto recarga, ergo no llega a hacer nada que venga después en el bloque  
         }
-        if (user !== 'none' && user.name !== 'admin') {
+        if ((user !== 'none') && (user.name !== 'admin')) { //tal vez no hacen falta los paréntesis, pero por ahora quedan
             console.log('tengo user y seteo cart')
             setCart(user.cart)
             //console.log(cart)
-        }
-
-       
+        }       
 
         /* try {
                        
@@ -41,13 +38,13 @@ const CartProvider = ({children}) => {
     }
 
     //Trae user.cart
-    const getCart = async ()=>{
+    /* const getCart = async ()=>{
         const response = await fetch('http://localhost:9000/carrito/listar',
                 {credentials: 'include'})
         const result = await response.json()
         console.log(result)
         return result
-    }
+    } */
 
     //Recibe información de ItemDetail
     const addItem = (objetoItem, quantity)=> {
@@ -56,7 +53,7 @@ const CartProvider = ({children}) => {
     //Crea el producto para pasarlo a la lógica
     const crearProducto = (objetoItem, cantidad, callback)=> {
         const subtotal = cantidad * objetoItem.price
-        const itemAgregado = {product: objetoItem, quantity: cantidad, subtotal: subtotal}              
+        const itemAgregado = {product: objetoItem, quantity: cantidad, subtotal/* subtotal: subtotal */}              
         callback(itemAgregado)
     }
     //Chuequea si el producto ya fue agregado, si no, lo agrega
@@ -68,9 +65,25 @@ const CartProvider = ({children}) => {
         }
         else{alert("El producto ya se encuentra en el carrito.")}
     }    
-    //Actualizar el usuario con propiedad cart! (Post a db - OLD)
+    //Actualizar el usuario con propiedad cart! (Post a db & getting the user: OLD)
     const createItem = async(prod)=>{
-        const user = await getUser()
+        const userId = user._id
+        //console.log(userId)
+        const response = await fetch(`http://localhost:9000/carrito/agregar/`, {
+            method: 'post', //new info to add
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                prod,
+                userId
+            })
+        })
+        const result = await response.json()
+        //console.log(result)
+        setCart(result)
+
+        /* const user = await getUser()
         //console.log(user._id)
         fetch(`http://localhost:9000/carrito/agregar/${user._id}`, {
             method: 'PATCH', //PATCH IS CASE SENSITIVE!!!!!!!!!!!!!!!
@@ -81,7 +94,8 @@ const CartProvider = ({children}) => {
                 item: prod,
                 userId: user._id
             })
-        })
+        }) */
+
         /* fetch('http://localhost:9000/carrito/agregar', {
             method: 'post',
             headers: {
@@ -122,7 +136,7 @@ const CartProvider = ({children}) => {
 
 
     return (
-        <Provider value={{cart, user, cantidadTotal, getItems, addItem, removeItem, /* clear, */ precioTotal, getUser, getCart}}>
+        <Provider value={{cart, user, cantidadTotal, getItems, addItem, removeItem, /* clear, */ precioTotal, getUser,/*  getCart */}}>
             {children}
         </Provider>
     )

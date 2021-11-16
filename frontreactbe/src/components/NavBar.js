@@ -6,7 +6,7 @@ import '../styles.css'
 
 const NavBar = () => {
     //const [userType, setUserType] = useState('none')
-    const {cart, getCart, getUser, user} = useContext(contexto)
+    const { getUser, user, } = useContext(contexto)
         
     useEffect(()=>{
         getUser()

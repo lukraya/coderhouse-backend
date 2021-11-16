@@ -8,7 +8,7 @@ const CartWidget = () => {
     const {cantidadTotal} = useContext(contexto)
 
     return (
-        <NavLink to="/cart" id="cartWidget">
+        <NavLink to="/carrito" id="cartWidget">
             <img src={cartIcon} alt="Icono de carrito" width="35px" height="35px"></img>
             {cantidadTotal ? <div>{cantidadTotal}</div> : null}
         </NavLink>
