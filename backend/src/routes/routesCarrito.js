@@ -18,8 +18,7 @@ module.exports = (router)=>{
     .get('/listar', getAllItems) //NavBar-CartContext
     .delete('/borrar/:cartId', deleteItem) //CartItem
     //.patch('/agregar/:userId', /* setHeaders, */ getTimestamp, addItem) //ItemCounter-CartContext    
-    //.patch('/actualizar/:cartId', /* setHeaders, */ updateItem) //CartItem -- CORS ERROR-POSTMAN OK
+    .patch('/actualizar/:cartId', /* setHeaders, */ updateItem) //CartItem -- CORS ERROR-POSTMAN OK
     
-
     return router
 }

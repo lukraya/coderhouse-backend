@@ -1,5 +1,5 @@
-const CartService = require('../services/cart')
-const cart = new CartService
+//const CartService = require('../services/cart')
+//const cart = new CartService
 const userModel = require('../dao/models/user')
 //Puede que técnicamente esta variable sea una práctica muy poco correcta
 //let cartProds = []
@@ -93,16 +93,29 @@ exports.deleteItem = async (req, res, next)=>{
         res.json(user.cart)
 
     } catch (error) {
-        
-    }
-
-    
+        console.log(error)
+    }    
 }
 
-/* exports.updateItem = async (req, res, next)=>{
-    const {body, params: {cartId}} = req
-    console.log(body)
-    const updatedItem = await cart.updateItem(cartId, body)
-    res.json(updatedItem)
-} */
+exports.updateItem = async (req, res, next)=>{
+    const {params: {cartId}} = req
+    //console.log(req.body)
+    
+    try {
+        const user = await userModel.findById(req.user._id)
+        user.cart.id(cartId).set(req.body)
+        await user.save((err)=>{
+            if (err) console.log(`error updating item`)
+            //console.log(`item updated`)
+        })
+        //console.log(user.cart)
+        res.json(user.cart)
+
+    } catch (error) {
+        console.log(error)
+    }
+
+    //const updatedItem = await cart.updateItem(cartId, body)
+    //res.json(updatedItem)
+}
 

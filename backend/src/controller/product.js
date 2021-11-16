@@ -1,9 +1,11 @@
 const ProductService = require('../services/product')
 const product = new ProductService
+//Este service está de más
 
 exports.createProduct = async (req, res, next)=>{
+    //console.log(req.body)
     await product.createProduct(req.body)
-    res.redirect('http://localhost:3000/api/productos/cargar')
+    res.redirect('http://localhost:3000/')
 }
 
 exports.getProduct = async (req, res, next)=>{
@@ -69,13 +71,14 @@ exports.getCategory = async (req, res, next)=>{
 exports.updateProduct = async (req, res, next)=>{
     const {body, params: {productId}} = req
     await product.updateProduct(productId, body)
-    res.redirect('http://localhost:3000/api/productos/listar')
+    res.redirect('http://localhost:3000/')
 }
 
 exports.deleteProduct = async (req, res, next)=>{
+    console.log('delete')
     const {params: {productId}} = req
     await product.deleteProduct(productId)
-    res.json({msg: "Producto eliminado"})
-    //error de cors al usar redirect? pero en la función de carga no..
-    //res.redirect('http://localhost:3000/api/productos/listar')
+    res.json({msj: "Producto eliminado"})
+    //Elimina el prod pero cors da error al usar redirect
+    //res.redirect('http://localhost:3000/')
 } 
