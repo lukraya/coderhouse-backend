@@ -22,7 +22,7 @@ const Checkout = () => {
     const crearOrden = (usuario, callback)=>{
         const newOrden = {  buyer: usuario,
                             items: cart,
-                            total: precioTotal()    }
+                            total: precioTotal(cart)    }
         callback(newOrden)
     }
     

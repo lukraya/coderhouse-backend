@@ -4,9 +4,12 @@ import '../../styles.css'
 
 const CartItem = ({item})=> {
     const { quantity, product, subtotal, _id } = item
-    const { removeItemCart } = useContext(contexto)
+    const { removeItemCart, updateItemCart } = useContext(contexto)
     const [ count, setCount ] = useState(quantity)
 
+    const onSave = () => {
+        updateItemCart(item, count)
+    }
     const onSumar = () => {
         if (count<product.stock) {
             setCount(count+1)
@@ -20,21 +23,7 @@ const CartItem = ({item})=> {
         }      
     }
 
-    /* Dos opciones:
-    A) no actualizo la cant al carrito en la bd, sino que al comprar mando la info presente acá como 
-        orden (post bd)
-    B) agrego un botón "guardar" con onClick=update para actualizar la cant en cart en bd*/
-    /* const updateQuantity = async (cant)=>{
-        fetch(`http://localhost:9000/carrito/actualizar/${_id}`, {
-            method: 'PATCH',
-            mode: 'cors',
-            headers: {
-                'Content-Type': 'application/json',                             
-            },
-            body: JSON.stringify({quantity: cant, subtotal: cant * product.price})
-        }).then((res)=>{res.headers('Access-Control-Allow-Origin', '*')})
-    } */
-   
+       
     return (
         <div className="productoCart">
             <h4>{product.name}</h4>
@@ -45,6 +34,7 @@ const CartItem = ({item})=> {
                 {count}
                 <button onClick={onSumar} className="controles">+</button>
             </p>
+            <button onClick={onSave}>Guardar</button>
             <p>Subtotal: ${subtotal}</p>
             <button onClick={()=>removeItemCart(_id)}>Quitar del carrito</button>
         </div>

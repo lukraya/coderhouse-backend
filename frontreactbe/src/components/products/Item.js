@@ -8,7 +8,7 @@ const Item = ({item})=> {
 
     const renderLink = ()=>{
         if (user.name === 'admin') {
-            return <NavLink to={`actualizar/${item._id}`}>Editar</NavLink>
+            return <NavLink to={`/actualizar/${item._id}`}>Editar</NavLink>
         } else if ((user !== 'none') && (user.name)) {
             return <NavLink to={`/${item._id}`}>Ver detalle</NavLink>
         }

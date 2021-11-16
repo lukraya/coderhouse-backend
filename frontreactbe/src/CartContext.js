@@ -37,7 +37,6 @@ const CartProvider = ({children}) => {
         } */
         //return result
     }
-
     
     //Recibe información de ItemDetail
     const addItem = (objetoItem, quantity)=> {
@@ -98,7 +97,7 @@ const CartProvider = ({children}) => {
         }) */
     }
 
-    //Remover todos los items
+    //Remover todos los items del carrito
     const clear = async ()=> {
         const response = await fetch(`http://localhost:9000/carrito/borrar/`, {
             method: 'PATCH',
@@ -124,15 +123,7 @@ const CartProvider = ({children}) => {
         //console.log(result)
         setCart(result)
     }
-    
-
-    //Buscar en la db
-    /* const getItems = async()=>{
-        const response = await fetch('http://localhost:9000/carrito')
-        const result = await response.json()
-        setCart(result)
-    } */
-    
+        
     //Remover un item del carrito usando su id
     const removeItemCart = async (itemId)=> {
         //console.log(`remove`)
@@ -145,16 +136,34 @@ const CartProvider = ({children}) => {
         //getItems()
     }
 
-    
+    const updateItemCart = async ({_id, product}, quantity)=>{
+        //console.log(`${product}`)
+        const response = await fetch(`http://localhost:9000/carrito/actualizar/${_id}`, {
+            method: 'PATCH',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',                             
+            },
+            body: JSON.stringify({quantity, subtotal: quantity * product.price})
+        })
+        const result = await response.json()
+        console.log(result) //cambia la vista sin que haga acá setCart, después de unos segundos
+    }
 
     //Sumar todos los subtotales
     const precioTotal = (array)=>{
         return array.reduce((suma, producto)=>suma + producto.subtotal, 0)
     }
 
+    //Buscar en la db
+    /* const getItems = async()=>{
+        const response = await fetch('http://localhost:9000/carrito')
+        const result = await response.json()
+        setCart(result)
+    } */
 
     return (
-        <Provider value={{cart, user, /* cantidadTotal, */ /* getItems, */ addItem, removeItemCart, clear, precioTotal, getUser, getCart}}>
+        <Provider value={{cart, user, /* cantidadTotal, */ /* getItems, */ addItem, removeItemCart, clear, precioTotal, getUser, getCart, updateItemCart}}>
             {children}
         </Provider>
     )

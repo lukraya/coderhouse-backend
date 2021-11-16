@@ -56,7 +56,7 @@ const App = ()=>{
             {/* <Route path="/api/productos/listar">
               <ApiProductsListContainer/>
             </Route> */}
-            <Route path="/api/productos/actualizar/:itemId">
+            <Route path="/actualizar/:itemId">
               <UpdateProductForm/>
             </Route>
             <Route path="/category/:categoryId">
