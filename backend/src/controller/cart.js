@@ -15,11 +15,11 @@ exports.addItem = async (req, res, next)=>{
         //console.log(user)
         user.cart.push(prod)
         //console.log(user.cart)
-        user.save((err)=>{
+        await user.save((err)=>{
             if (err) console.log(`error saving doc`)
-            console.log('success')
+            //console.log('item agregado a cart')
         })
-
+        //console.log(user.cart)
         res.json(user.cart)
 
     } catch (error) {
@@ -40,17 +40,32 @@ exports.addItem = async (req, res, next)=>{
     //await cart.createItem(req.body)
 }
 
+exports.deleteAll = async (req, res, next)=>{
+    try {
+        await userModel.findByIdAndUpdate(req.body.userId, {cart: []}) //works!
+        //console.log('carrito vaciado')
+        res.json({msj: 'success'})
+        /* const user = await userModel.findById(req.user._id)
+        user.cart.remove()
+        user.save((err)=>{
+            if (err) console.log(`error al vaciar cart`)
+            console.log('cart vaciado')
+        }) */
+    } catch (error) {
+        console.log(`error al vaciar el cart: ${error}`)
+        res.json({msj: 'error'})
+    }
+}
+
 exports.getAllItems = async (req, res, next)=>{
     if (req.user) {
         try {
             //console.log(req.user)
             const user = await userModel.findById(req.user._id)
-            //console.log(user.cart)
-            cartProds = user.cart
+            //console.log(user.cart)            
 
-            res.json(cartProds)
+            res.json(user.cart)
 
-            //Me sale un error de "query already executed", pero el prod se agrega correctamente
         } catch (error) {
             console.log(error)    
         }
@@ -60,18 +75,34 @@ exports.getAllItems = async (req, res, next)=>{
     res.json(items) */
 }
 
+exports.deleteItem = async (req, res, next)=>{
+    //console.log('deleteItem')
+    const {params: {cartId}} = req
+    //await cart.deleteItem(cartId)
+    try {
+        //console.log('en try')
+        const user = await userModel.findById(req.user._id)
+        //console.log(user.cart.id(cartId))
+        user.cart.id(cartId).remove()
+        //Definitivamente necesito el save para que se guarde en la bd
+        await user.save((err)=>{
+            if (err) console.log(`error saving doc`)
+            //console.log('item eliminado de cart')
+        })
+        //console.log(user.cart)
+        res.json(user.cart)
 
+    } catch (error) {
+        
+    }
 
+    
+}
 
-exports.updateItem = async (req, res, next)=>{
+/* exports.updateItem = async (req, res, next)=>{
     const {body, params: {cartId}} = req
     console.log(body)
     const updatedItem = await cart.updateItem(cartId, body)
     res.json(updatedItem)
-}
+} */
 
-exports.deleteItem = async (req, res, next)=>{
-    const {params: {cartId}} = req
-    await cart.deleteItem(cartId)
-    res.json({msg: "Item eliminado"})
-}

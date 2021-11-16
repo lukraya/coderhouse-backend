@@ -48,7 +48,9 @@ const corsOptions = {
     preflightContinue: true,
     optionsSuccessStatus: 200
 }
-app.options('*', cors())
+//This is to enable pre-flight across-the-board, but 
+//when using this middleware as an app level middleware (i.e. app.use(cors())), pre-flight requests are already handled for all routes.
+//app.options('*', cors())
 //Setting middlewares
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))

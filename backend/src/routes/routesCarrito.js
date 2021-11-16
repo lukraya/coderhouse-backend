@@ -1,4 +1,4 @@
-const { addItem, getAllItems, updateItem, deleteItem } = require('../controller/cart')
+const { addItem, getAllItems, updateItem, deleteItem, deleteAll } = require('../controller/cart')
 const dayjs = require('dayjs')
 
 function getTimestamp(req, res, next) {
@@ -6,7 +6,7 @@ function getTimestamp(req, res, next) {
     next()
 }
 function setHeaders(req, res, next) {    
-    res.headers('Access-Control-Allow-Origin', /* '*' */'http://localhost:3000')
+    res.headers('Access-Control-Allow-Origin', 'http://localhost:3000')
     console.log(res.headers)
     next()
 }
@@ -14,12 +14,12 @@ function setHeaders(req, res, next) {
 module.exports = (router)=>{
     router
     .post('/agregar', getTimestamp, addItem)
-    //.patch('/agregar/:userId', /* setHeaders, */ getTimestamp, addItem) //ItemCounter-CartContext
+    .patch('/borrar', deleteAll)
     .get('/listar', getAllItems) //NavBar-CartContext
-    
-    
-    .patch('/actualizar/:cartId', /* setHeaders, */ updateItem) //CartItem -- CORS ERROR-POSTMAN OK
     .delete('/borrar/:cartId', deleteItem) //CartItem
+    //.patch('/agregar/:userId', /* setHeaders, */ getTimestamp, addItem) //ItemCounter-CartContext    
+    //.patch('/actualizar/:cartId', /* setHeaders, */ updateItem) //CartItem -- CORS ERROR-POSTMAN OK
+    
 
     return router
 }
