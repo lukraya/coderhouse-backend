@@ -1,6 +1,6 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, /* useState */ } from 'react'
 import { NavLink } from 'react-router-dom'
-import CartWidget from './cart/CartWidget'
+//import CartWidget from './cart/CartWidget'
 import { contexto } from '../CartContext'
 import '../styles.css'
 

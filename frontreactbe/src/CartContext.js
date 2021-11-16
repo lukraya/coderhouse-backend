@@ -6,7 +6,7 @@ const {Provider} = contexto
 const CartProvider = ({children}) => {
     const [user, setUser] = useState('none')
     const [cart, setCart] = useState([])
-    const [cantidadTotal, setCantidadTotal] = useState(0)
+    //const [cantidadTotal, setCantidadTotal] = useState(0)
     //Queda hacer una función que sume las cantidades de los items en cart, traidos de la db. Probablemente algo como preciototal()
 
     //Trae el user --- NO setear acá cart: pisa otros setCart con data desactualizada. Será por cache de la req?
@@ -154,7 +154,7 @@ const CartProvider = ({children}) => {
 
 
     return (
-        <Provider value={{cart, user, cantidadTotal, /* getItems, */ addItem, removeItemCart, clear, precioTotal, getUser, getCart}}>
+        <Provider value={{cart, user, /* cantidadTotal, */ /* getItems, */ addItem, removeItemCart, clear, precioTotal, getUser, getCart}}>
             {children}
         </Provider>
     )

@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react'
-import {useParams} from 'react-router-dom'
+import {useParams, NavLink} from 'react-router-dom'
 import ItemList from './ItemList'
 import '../../styles.css'
 
@@ -55,9 +55,19 @@ const ItemListContainer = ({greeting})=>{
         setItems(result)
     }
 
+    //Probablemente podría tener acá un componente Filtros o parecido; separar lógica de render
+    //Solución temporal muy poco elegante para filtros por categoría
     return (
         <>
             <h1>{greeting}</h1>
+            <div>
+                <p>Filtrar por categoría: </p>
+                <p>
+                    <span className="categorias"><NavLink to="/category/Bebidas">Bebidas</NavLink></span>
+                    <span className="categorias"><NavLink to="/category/Galletitas">Galletitas</NavLink></span>
+                    <span className="categorias"><NavLink to="/category/Alfajores">Alfajores</NavLink></span>
+                </p>
+            </div>
             <input type="text" id="prodName" name="prodName" onInput={e=>setProdName(e.target.value)} placeholder="Nombre del producto"/>
             <button onClick={()=>{getByName(prodName)}}>Buscar</button><br/>
             <input type="text" id="prodCode" name="prodCode" onInput={e=>setProdCode(e.target.value)} placeholder="código"/>
