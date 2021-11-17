@@ -1,4 +1,12 @@
 //let user = {name: 'none'}
+const { alertNewUser } = require('../services/notification')
+
+exports.signup = async (req, res, next)=>{
+    //console.log(req.user)
+    alertNewUser(req.user)
+
+    res.redirect('http://localhost:3000/')
+}
 
 exports.logout = async (req, res, next)=>{
     //console.log(`logout? ${req.user}`)
@@ -21,6 +29,7 @@ exports.getUser = async (req, res, next)=>{
     
     res.json(user)
 }
+
 /* exports.logUser = async (req, res, next)=>{
     userType = req.user.name
 
