@@ -1,0 +1,13 @@
+config:
+    target: 'http://localhost:9000/'
+    phases:
+       - duration: 50
+         arrivalRate: 1
+         name: test
+scenarios:
+    - name: "Get products"
+    - flow:
+        - loop:
+            - get:
+                url: '/productos'
+          count: 20
