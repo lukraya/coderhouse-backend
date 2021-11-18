@@ -120,8 +120,10 @@ const CartProvider = ({children}) => {
         const response = await fetch('http://localhost:9000/carrito/listar',
                 {credentials: 'include'})
         const result = await response.json()
-        //console.log(result)
-        setCart(result)
+        console.log(result)
+        if (JSON.stringify(result)!==JSON.stringify(cart)) {
+            setCart(result)
+        }
     }
         
     //Remover un item del carrito usando su id

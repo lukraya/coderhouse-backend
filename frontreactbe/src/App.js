@@ -16,6 +16,7 @@ import LoginForm from './components/auth/LoginForm'
 import './styles.css'
 import Logout from './components/auth/Logout'
 import Profile from './components/Profile'
+import OrderNew from './components/cart/OrderNew'
 
 
 
@@ -66,7 +67,7 @@ const App = ()=>{
               <Cart/>
             </Route>
             <Route path="/checkout">
-              <Checkout/>
+              <OrderNew/>
             </Route>
             <Route path="/:itemId">
               <ItemDetailContainer/>
