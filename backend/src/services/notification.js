@@ -15,6 +15,19 @@ const transporterGmail = nodemailer.createTransport({
     }
 })
 
+/* const generateHtml = async (prods)=>{
+    return prods.forEach((prod)=>{
+        return `
+            <li>${prod.product.name}
+                <ul>
+                    <li>ID de producto: ${prod.product._id}</li>
+                    <li>Unidades: ${prod.quantity}</li>
+                    <li>Subtotal: ${prod.subtotal}</li>
+                </ul>
+            </li>`
+    })
+} */
+
 const sendMailSignup = async (user)=>{
     await transporterGmail.sendMail({
         from: 'Alerta de servidor',
@@ -37,6 +50,38 @@ const sendMailSignup = async (user)=>{
     })
 }
 
+const sendMailOrder = async (name, email, total, products)=>{
+    try {
+        await transporterGmail.sendMail({
+            from: 'Alerta de servidor',
+            to: USER_GMAIL,
+            subject: `Nuevo pedido de ${name} (${email})`,
+            html: `<h3>Detalle de compra: </h3>
+                <p>Valor total: ${total}</p>
+                <ul>Productos: 
+                    ${JSON.stringify(products)}
+                </ul>    
+            `, //No queda linda la data, pero se ve
+        })
+        console.log('mail enviado')
+    } catch (error) {
+        console.log(`Error al enviar mail: ${error}`)
+    }
+}
+
+const sendSmsOrder = async (phone)=>{
+    try {
+        await twilioClient.messages.create({
+            body: `Su pedido ha sido recibido y se encuentra en proceso.`,
+            from: '+13203387865',
+            to: ADMIN_PHONE //phone
+        })
+        console.log('mensaje enviado')
+    } catch (error) {
+        console.log(`Error al enviar sms: ${error}`)
+    }
+}
+
 
 class NotificationService {
     //Alert admin of new sign up via gmail
@@ -49,10 +94,16 @@ class NotificationService {
     }
 
     //Alert admin of new order via gmail & user via sms
-    async alertNewOrder (orderData, userData) {
+    async alertNewOrder (orderData) {
+        //console.log(orderData)
+        const { name, email, cellphone } = orderData.from
+        const { total, products } = orderData
 
+        //const prodsHtml = await generateHtml(products)
+        
+        await sendMailOrder(name, email, total, products)
+        await sendSmsOrder(cellphone)        
     }
-
 }
 
 module.exports = new NotificationService

@@ -1,6 +1,7 @@
 //const CartService = require('../services/cart')
 //const cart = new CartService
 const userModel = require('../dao/models/user')
+const { alertNewOrder } = require('../services/notification')
 //Puede que técnicamente esta variable sea una práctica muy poco correcta
 //let cartProds = []
 
@@ -119,3 +120,12 @@ exports.updateItem = async (req, res, next)=>{
     //res.json(updatedItem)
 }
 
+exports.createOrder = async (req, res, next)=>{
+    const {order} = req.body
+    //console.log(order)
+    await alertNewOrder(order)
+
+    res.json({msj: "Alertas enviadas."})
+    //Error de cors al user redirect
+    //res.redirect('http://localhost:3000/checkout')
+}
