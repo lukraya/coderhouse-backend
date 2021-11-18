@@ -4,14 +4,14 @@ const { getAllProducts, getByStock, getPriceOver, getPriceUnder, getCategory,
 
 module.exports = (router)=>{
     router
-    .get('/', getAllProducts) //ItemListcontainer
-    .get('/stock', getByStock) //ItemListContainer
-    .get('/precio/menor', getPriceUnder) //ItemListContainer
-    .get('/precio/mayor', getPriceOver) //ItemListContainer
-    .get('/cateogry/:categoryId', getCategory) //ItemListContainer
-    .get('/nombre/:prodName', getByName) //ItemListContainer
-    .get('/codigo/:prodCode', getByCode) //ItemListContainer
-    .get('/:productId', getProduct) //ItemDetailContainer    
+    .get('/', getAllProducts)
+    .get('/stock', getByStock)
+    .get('/precio/menor', getPriceUnder)
+    .get('/precio/mayor', getPriceOver)
+    .get('/cateogry/:categoryId', getCategory)
+    .get('/nombre/:prodName', getByName)
+    .get('/codigo/:prodCode', getByCode)
+    .get('/:productId', getProduct)
 
     return router
 }

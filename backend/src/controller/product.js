@@ -3,7 +3,6 @@ const product = new ProductService
 //Este service está de más
 
 exports.createProduct = async (req, res, next)=>{
-    //console.log(req.body)
     await product.createProduct(req.body)
     res.redirect('http://localhost:3000/')
 }
@@ -79,6 +78,4 @@ exports.deleteProduct = async (req, res, next)=>{
     const {params: {productId}} = req
     await product.deleteProduct(productId)
     res.json({msj: "Producto eliminado"})
-    //Elimina el prod pero cors da error al usar redirect
-    //res.redirect('http://localhost:3000/')
 } 

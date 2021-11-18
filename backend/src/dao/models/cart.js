@@ -1,4 +1,4 @@
-const {Schema, model} = require('mongoose')
+const {Schema} = require('mongoose')
 
 const cartSchema = new Schema({
     timestamp: String,
@@ -15,7 +15,6 @@ const cartSchema = new Schema({
         category: String,
         timestamp: String
     }
-}/* , {collection: 'carrito'} */)
+})
 
-//module.exports = model('Cart', cartSchema)
 module.exports = cartSchema

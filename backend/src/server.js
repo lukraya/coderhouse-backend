@@ -33,7 +33,7 @@ app.use(
             mongoOptions,
         }),
         secret: SESSION_SECRET,
-        resave: false, //false?
+        resave: false,
         saveUninitialized: true,
         rolling: true,
         cookie: {
@@ -49,9 +49,7 @@ const corsOptions = {
     preflightContinue: true,
     optionsSuccessStatus: 200
 }
-//This is to enable pre-flight across-the-board, but 
-//when using this middleware as an app level middleware (i.e. app.use(cors())), pre-flight requests are already handled for all routes.
-//app.options('*', cors())
+
 //Setting middlewares
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
@@ -62,7 +60,6 @@ app.use(cors(corsOptions))
 app.use(compression())
 
 
-//Las rutas después de json o urlencoded!!
 const routesAuth = require('./routes/routesAuth')
 app.use('/auth', routesAuth(routerAuth))
 const routesApi = require('./routes/routesApi')

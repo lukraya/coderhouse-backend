@@ -61,7 +61,7 @@ const sendMailOrder = async (name, email, total, products)=>{
                 <ul>Productos: 
                     ${JSON.stringify(products)}
                 </ul>    
-            `, //No queda linda la data, pero se ve
+            `,
         })
         console.log('mail enviado')
     } catch (error) {
@@ -95,7 +95,6 @@ class NotificationService {
 
     //Alert admin of new order via gmail & user via sms
     async alertNewOrder (orderData) {
-        //console.log(orderData)
         const { name, email, cellphone } = orderData.from
         const { total, products } = orderData
 

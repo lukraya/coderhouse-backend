@@ -29,7 +29,6 @@ passport.use('login', loginStrategy)
 
 
 const signupVerifyCallback = (req, email, password, done)=>{
-    //console.log(`en signupVC: ${email}`)
     const { name, address, age, cellphone, avatar } = req.body
     userModel.findOne({email})
         .then(async (user)=>{
@@ -47,19 +46,15 @@ const signupVerifyCallback = (req, email, password, done)=>{
                     hash,
                     salt
                 }
-                //console.log(newUser)
                 userModel.create(newUser)
                     .then((user)=>{
-                        //console.log(user)
                         return done(null, user)
                     })
                     .catch((err)=>{ 
-                        //console.log(err)
                         done(err) })
             }
         })
         .catch((err)=>{ 
-            //console.log(`findOne failed ${err}`)
             done(err) })
 }
 const signupStrategy = new LocalStrategy(
@@ -73,11 +68,9 @@ passport.use('signup', signupStrategy)
 
 
 passport.serializeUser((user, done)=>{
-    //console.log(`serialize ${user.id}`)
     done(null, user.id)
 })
 passport.deserializeUser((id, done)=>{
-    //console.log(`deserialize ${id}`)
     userModel.findById(id, (err, user)=>{
         done(err, user)
     })
