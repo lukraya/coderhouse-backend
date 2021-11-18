@@ -11,7 +11,7 @@ const ItemDetailContainer = ()=> {
 
     useEffect(()=>{
         getOneProduct(itemId)
-        getCart() //Traer cart de la bd antes de agregar para q funcione el chequeo de isInCart
+        getCart()
     }, [itemId])
     
     const getOneProduct = async (id)=>{

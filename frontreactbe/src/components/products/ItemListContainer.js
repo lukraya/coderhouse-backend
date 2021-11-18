@@ -55,8 +55,6 @@ const ItemListContainer = ({greeting})=>{
         setItems(result)
     }
 
-    //Probablemente podría tener acá un componente Filtros o parecido; separar lógica de render
-    //Solución temporal muy poco elegante para filtros por categoría
     return (
         <>
             <h1>{greeting}</h1>

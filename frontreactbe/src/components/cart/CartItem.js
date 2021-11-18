@@ -13,16 +13,13 @@ const CartItem = ({item})=> {
     const onSumar = () => {
         if (count<product.stock) {
             setCount(count+1)
-            //updateQuantity(count) - Esto es una locura
         }                
     }
     const onRestar = () => {
         if (count>1) {
             setCount(count-1)
-            //updateQuantity(count)
         }      
     }
-
        
     return (
         <div className="productoCart">
