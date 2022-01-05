@@ -1,6 +1,6 @@
 //INICIALIZACIÓN DEL SERVIDOR
-const {PORT} = require('./config/globals')
-const {getConnection} = require('./dao/db/connection')
+const { PORT } = require('./config/globals')
+const { getConnection } = require('./dal/db/connection')
 const server = require('./server')
 
 getConnection().then((message)=>{

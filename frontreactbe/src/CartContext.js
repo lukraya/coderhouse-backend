@@ -13,8 +13,8 @@ const CartProvider = ({children}) => {
                 {credentials: 'include'})
         const result = await response.json()
         if (result._id !== user._id) {
-            console.log('resultId distinta de userId, setUser')
-            setUser(result) 
+            //console.log('resultId distinta de userId, setUser')
+            setUser(result)
         }
     }
     
@@ -75,7 +75,7 @@ const CartProvider = ({children}) => {
         const response = await fetch('http://localhost:9000/carrito/listar',
                 {credentials: 'include'})
         const result = await response.json()
-        console.log(result)
+        //console.log(result)
         if (JSON.stringify(result)!==JSON.stringify(cart)) {
             setCart(result)
         }

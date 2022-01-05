@@ -15,19 +15,6 @@ const transporterGmail = nodemailer.createTransport({
     }
 })
 
-/* const generateHtml = async (prods)=>{
-    return prods.forEach((prod)=>{
-        return `
-            <li>${prod.product.name}
-                <ul>
-                    <li>ID de producto: ${prod.product._id}</li>
-                    <li>Unidades: ${prod.quantity}</li>
-                    <li>Subtotal: ${prod.subtotal}</li>
-                </ul>
-            </li>`
-    })
-} */
-
 const sendMailSignup = async (user)=>{
     await transporterGmail.sendMail({
         from: 'Alerta de servidor',
@@ -83,7 +70,7 @@ const sendSmsOrder = async (phone)=>{
 }
 
 
-class NotificationService {
+const notificationService = () => ({
     //Alert admin of new sign up via gmail
     async alertNewUser (userData) {
         try {
@@ -91,7 +78,7 @@ class NotificationService {
         } catch (error) {
             console.log(`Error en alerta por registro: ${error}`)
         }
-    }
+    },
 
     //Alert admin of new order via gmail & user via sms
     async alertNewOrder (orderData) {
@@ -102,7 +89,7 @@ class NotificationService {
         
         await sendMailOrder(name, email, total, products)
         await sendSmsOrder(cellphone)        
-    }
-}
+    },
+})
 
-module.exports = new NotificationService
+module.exports = notificationService

@@ -6,10 +6,10 @@ const express = require('express')
 const app = express()
 const server = http.createServer(app)
 
-const routerAuth = express.Router()
+/* const routerAuth = express.Router()
 const routerApi = express.Router()
 const routerProductos = express.Router()
-const routerCarrito = express.Router()
+const routerCarrito = express.Router() */
 
 //db
 const MongoStore = require('connect-mongo')
@@ -59,15 +59,16 @@ app.use(cookieParser())
 app.use(cors(corsOptions))
 app.use(compression())
 
-
-const routesAuth = require('./routes/routesAuth')
+const router = require('./routes')
+app.use(router)
+/* const routesAuth = require('./routes/routesAuth')
 app.use('/auth', routesAuth(routerAuth))
 const routesApi = require('./routes/routesApi')
 app.use('/api/productos', routesApi(routerApi))
 const routesProductos = require('./routes/routesProductos')
 app.use('/productos', routesProductos(routerProductos))
 const routesCarrito = require('./routes/routesCarrito')
-app.use('/carrito', routesCarrito(routerCarrito))
+app.use('/carrito', routesCarrito(routerCarrito)) */
 
 
 module.exports = server
