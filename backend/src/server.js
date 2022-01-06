@@ -6,6 +6,9 @@ const express = require('express')
 const app = express()
 const server = http.createServer(app)
 
+//const {Server} = require('socket.io')
+//const io = new Server(server)
+
 /* const routerAuth = express.Router()
 const routerApi = express.Router()
 const routerProductos = express.Router()
