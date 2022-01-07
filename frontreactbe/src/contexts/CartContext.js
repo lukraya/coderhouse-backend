@@ -6,7 +6,7 @@ const {Provider} = contexto
 const CartProvider = ({children}) => {
     const [user, setUser] = useState('none')
     const [cart, setCart] = useState([])
-    const [chat, setChat] = useState([])
+    const [chat, setChat] = useState(false)
 
     //Trae el user
     const getUser = async ()=>{
@@ -113,14 +113,17 @@ const CartProvider = ({children}) => {
     const getUserChat = async ()=>{
         const response = await fetch('http://localhost:9000/chat',
                 {credentials: 'include'})
-        const result = await response.json()
-        console.log(result)
-        if (JSON.stringify(result)!==JSON.stringify(chat)) {
-            setChat(result)
+        //console.log(response)
+        try {
+            const result = await response.json()
+            //console.log(result) //This is happening FOUR times
+            if (JSON.stringify(result)!==JSON.stringify(chat)) {
+                setChat(result)
+            }
+        } catch (error) {
+            console.log(error)
         }
     }
-
-    
 
     const sendMessage = async (userId, msg)=>{
         const response = await fetch(`http://localhost:9000/chat`, {

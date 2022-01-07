@@ -1,10 +1,10 @@
 import React from 'react'
 
 const Message = ({msg}) => {
-    console.log(msg)
+    //console.log(msg)
     return (
         <div>
-            {msg.text}
+            <p>{msg.sender}: {msg.text}</p>
         </div>
     )
 }
