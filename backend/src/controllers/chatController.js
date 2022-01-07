@@ -1,6 +1,7 @@
 const chatController = (service) => ({
     async getUserChat(req, res, next) {
         const result = await service.getUserChat(req.user._id)
+        //console.log(result)
         res.json(result) //debería ser el array de msjs correspondientes
     },
 

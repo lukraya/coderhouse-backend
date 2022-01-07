@@ -1,6 +1,7 @@
 const chatDao = (model) => ({
     async getChat(userId) {
-        const { chat } = model.findById(userId, 'chat')
+        const chat = model.findById(userId, 'chat')
+        //console.log(chat) //prints Query, but the front's getting the user._id and the array of msgs
         return chat
     },
 

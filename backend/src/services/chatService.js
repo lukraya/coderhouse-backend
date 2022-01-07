@@ -1,5 +1,5 @@
 const chatService = (dao) => ({
-    async getChat(userId) {
+    async getUserChat(userId) {
         const chat = await dao.getChat(userId)
         return chat
     },

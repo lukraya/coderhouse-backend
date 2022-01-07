@@ -4,7 +4,7 @@ const chatRoutes = (controller) => {
     router
     .get('/', controller.getUserChat)
     .get('/listar', controller.getAllChats)
-    .post('/', constroller.newMessage)
+    .post('/', controller.newMessage)
 
     return router
 }
