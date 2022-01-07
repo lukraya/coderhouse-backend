@@ -17,6 +17,8 @@ const cartDao = (model) => ({
     async getAll(userId) {
         try {
             const { cart } = await model.findById(userId, 'cart')
+            //Arriba 'cart' podría ser tmb select: 'cart -_id', para excluir el id de la rta y no tener que
+            //hacer destructure
             return cart
         } catch (error) {
             console.log('Get cart failed', error)

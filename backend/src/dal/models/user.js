@@ -9,6 +9,7 @@ const userSchema = new Schema({
     avatar: String,
     email: String,
     cart: [cartSchema],
+    chat: { type: Schema.Types.ObjectId, ref: 'Chat'}, //ACÁ REFERENCIA AL DOC EN COLECCION CHATS CUYO USER COINCIDA CON EL EMAIL DE ESTE DOC
     hash: String,
     salt: String
 }, {collection: 'usuarios'})
