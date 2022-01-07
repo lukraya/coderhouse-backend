@@ -6,6 +6,7 @@ const {Provider} = contexto
 const CartProvider = ({children}) => {
     const [user, setUser] = useState('none')
     const [cart, setCart] = useState([])
+    const [chat, setChat] = useState([])
 
     //Trae el user
     const getUser = async ()=>{
@@ -13,7 +14,7 @@ const CartProvider = ({children}) => {
                 {credentials: 'include'})
         const result = await response.json()
         if (result._id !== user._id) {
-            //console.log('resultId distinta de userId, setUser')
+            console.log('resultId distinta de userId, setUser')
             setUser(result)
         }
     }
@@ -109,8 +110,37 @@ const CartProvider = ({children}) => {
         return array.reduce((suma, producto)=>suma + producto.subtotal, 0)
     }
 
+    const getUserChat = async ()=>{
+        const response = await fetch('http://localhost:9000/chat',
+                {credentials: 'include'})
+        const result = await response.json()
+        console.log(result)
+        if (JSON.stringify(result)!==JSON.stringify(chat)) {
+            setChat(result)
+        }
+    }
+
+    
+
+    const sendMessage = async (userId, msg)=>{
+        const response = await fetch(`http://localhost:9000/chat`, {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                userId,
+                msg
+            })
+        })
+        const result = await response.json()
+        console.log(result)
+        setChat(result)
+    }
+
     return (
-        <Provider value={{cart, user, addItem, removeItemCart, clear, precioTotal, getUser, getCart, updateItemCart}}>
+        <Provider value={{cart, user, chat, addItem, removeItemCart, clear, precioTotal, getUser, 
+            getCart, updateItemCart, getUserChat, /* getAllChats, */ sendMessage}}>
             {children}
         </Provider>
     )

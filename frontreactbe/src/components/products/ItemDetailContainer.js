@@ -1,7 +1,7 @@
 import React, {useEffect, useState, useContext} from 'react'
 import {useParams} from 'react-router-dom'
 import ItemDetail from './ItemDetail'
-import { contexto } from '../../CartContext'
+import { contexto } from '../../contexts/CartContext'
 import '../../styles.css'
 
 const ItemDetailContainer = ()=> {

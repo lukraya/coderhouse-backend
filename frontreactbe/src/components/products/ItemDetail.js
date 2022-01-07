@@ -1,6 +1,6 @@
 import React, {useContext, useState} from 'react'
 import { NavLink } from 'react-router-dom'
-import { contexto } from '../../CartContext'
+import { contexto } from '../../contexts/CartContext'
 import ItemCounter from './ItemCounter'
 import '../../styles.css'
 

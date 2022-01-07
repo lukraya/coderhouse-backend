@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react'
-import { contexto } from '../CartContext'
-import '../styles.css'
+import { contexto } from '../../contexts/CartContext'
+import '../../styles.css'
 
 const Profile = () => {
     const { getUser, user } = useContext(contexto)

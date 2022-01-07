@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
-import { contexto } from '../CartContext'
+import { contexto } from '../contexts/CartContext'
 import '../styles.css'
 
 const NavBar = () => {
@@ -29,6 +29,7 @@ const NavBar = () => {
             return (
                 <>
                     <li className="categorias"><NavLink to="/perfil">Mi Perfil</NavLink></li>
+                    <li className="categorias"><NavLink to="/chat">Consultar</NavLink></li>
                     <li className="categorias"><NavLink to="/carrito">Mi Carrito</NavLink></li>                    
                     <li className="categorias"><NavLink to="/logout">Log out</NavLink></li>
                 </>
