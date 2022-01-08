@@ -1,38 +1,45 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, } from 'react'
 import { contexto } from '../../contexts/CartContext'
-import Message from '../user/Message'
+import Message from './Message'
 
-const Chat = ({chat}) => {
-    const { sendMessage, user } = useContext(contexto)
-    const [text, setText] = useState('')
-    const { messages } = chat
+const UserChat = () => {
+    const { chat, getUserChat, sendMessage, user } = useContext(contexto)
+    const array = chat.chat
+    let text = ''
 
+    useEffect(()=>{
+        getUserChat()
+    })
+    
     function handleSubmit(e) {
         e.preventDefault()
         
         const newMessage = {
-            date: new Date().toLocaleString(), //hopefully FyH
+            date: new Date().toLocaleString(), 
             sender: user.email === 'tiroalpanda@gmail.com' ? 'admin' : user.email,
             recipient: user.email === 'tiroalpanda@gmail.com' ? user.email : 'admin',
             text,
         }
 
-        sendMessage(user._id, newMessage)
-        setText('')
+        sendMessage(user.email, newMessage)
+        text = ''
     }
-
+    
     return (
         <div>
             <div>
-                {messages.map(msg=>{return <Message key={msg._id} msg={msg}/>})}
+                {array 
+                ? array.map(msg=>{return <Message key={msg._id} msg={msg}/>})
+                : null
+                }
             </div>
             <form onSubmit={handleSubmit}>
                 <textarea 
                 id='texto'
                 required
                 name='texto'
-                value={text}
-                onChange={e => setText(e.target.value)}
+                defaultValue={text}
+                onChange={e => text = e.target.value}
                 style={{resize: 'none'}}
                 /><br/>
                 <button type='submit'>Enviar</button>
@@ -41,4 +48,4 @@ const Chat = ({chat}) => {
     )
 }
 
-export default Chat
+export default UserChat

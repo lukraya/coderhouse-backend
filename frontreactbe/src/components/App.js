@@ -9,15 +9,14 @@ import LoginFailure from './auth/LoginFailure'
 import LoginForm from './auth/LoginForm'
 import Logout from './auth/Logout'
 import Profile from './user/Profile'
-//import ChatContainer from './user/ChatContainer'
 import Cart from './cart/Cart'
 import OrderNew from './cart/OrderNew'
 import CreateProductForm from './api/CreateProductForm'
 import UpdateProductForm from './api/UpdateProductForm'
 import '../styles.css'
-import Chat from './user/Chat'
-//import ChatProvider from '../contexts/ChatProvider'
-
+import UserChat from './user/UserChat'
+import Chats from './api/Chats'
+import AdminChat from './api/AdminChat'
 
 
 const App = ()=>{
@@ -49,7 +48,7 @@ const App = ()=>{
                 <Profile/>
               </Route>
               <Route path="/chat">
-                <Chat/>
+                <UserChat/>
               </Route>            
               <Route path="/nuevo-producto">
                 <CreateProductForm/>
@@ -57,6 +56,13 @@ const App = ()=>{
               <Route path="/actualizar/:itemId">
                 <UpdateProductForm/>
               </Route>
+               <Route path="/chatlist/:email">
+                <AdminChat/>
+              </Route>
+              <Route path="/chatlist">
+                <Chats/>
+              </Route>
+             
               <Route path="/category/:categoryId">
                 <ItemListContainer greeting="Bienvenidos a la tienda"/>
               </Route>

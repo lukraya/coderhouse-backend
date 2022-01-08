@@ -1,9 +1,7 @@
-import React, { /* useContext, */ useEffect, useState } from 'react'
-import ChatCard from './ChatCard'
-//import { contexto } from '../../contexts/CartContext'
+import React, { useEffect, useState } from 'react'
+import { NavLink } from 'react-router-dom'
 
 const Chats = () => {
-    //const { getAllChats } = useContext(contexto)
     const [chats, setChats] = useState([])
 
     useEffect(()=>{
@@ -15,13 +13,15 @@ const Chats = () => {
                 {credentials: 'include'}) //no necesito las credentials, creo
         const result = await response.json()
         console.log(result)
-        setChats(result)
+        if (JSON.stringify(result)!==JSON.stringify(chats)) {
+            setChats(result)
+        }
     }
 
     return (
         <div>
             {chats.length > 0
-            ? chats.map(chat=>{return <ChatCard key={chat._id} chat={chat}/>
+            ? chats.map(chat=>{return <h4 key={chat._id}><NavLink to={`/chatlist/${chat.email}`}>{chat.email}</NavLink></h4>
             })
             : <p>No hay consultas</p>
             }

@@ -7,6 +7,7 @@ const CartProvider = ({children}) => {
     const [user, setUser] = useState('none')
     const [cart, setCart] = useState([])
     const [chat, setChat] = useState(false)
+    const [selectedChat, setSelectedChat] = useState(false)
 
     //Trae el user
     const getUser = async ()=>{
@@ -125,25 +126,35 @@ const CartProvider = ({children}) => {
         }
     }
 
-    const sendMessage = async (userId, msg)=>{
+    const getSelectedChat = async (email)=>{
+        const response = await fetch(`http://localhost:9000/chat/${email}`)
+        const result = await response.json()
+        if(selectedChat === false) {
+            //console.log(result)
+            setSelectedChat(result.chat)
+        }
+    }
+
+    const sendMessage = async (email, msg)=>{
         const response = await fetch(`http://localhost:9000/chat`, {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                userId,
+                email,
                 msg
             })
         })
         const result = await response.json()
         console.log(result)
         setChat(result)
+        setSelectedChat(result)
     }
 
     return (
         <Provider value={{cart, user, chat, addItem, removeItemCart, clear, precioTotal, getUser, 
-            getCart, updateItemCart, getUserChat, /* getAllChats, */ sendMessage}}>
+            getCart, updateItemCart, getUserChat, sendMessage, getSelectedChat, selectedChat}}>
             {children}
         </Provider>
     )
