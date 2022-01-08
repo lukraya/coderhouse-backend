@@ -17,68 +17,74 @@ import '../styles.css'
 import UserChat from './user/UserChat'
 import Chats from './api/Chats'
 import AdminChat from './api/AdminChat'
-
+//import { SocketProvider } from '../contexts/SocketProvider'
+//import { useState } from 'react'
 
 const App = ()=>{
+  //const [userEmail, setUserEmail] = useState()
+
+  //getUser y getSelectedChat van a setUserEmail - NavBar y AdminChat
   return (
-    <CartProvider>
-        <BrowserRouter>
-          <NavBar/>
-          <main>
-            <Switch>
-              <Route path="/" exact>
-                <ItemListContainer greeting="Bienvenidos a la tienda"/>
-              </Route>
-              <Route path="/signup">
-                <SignupForm/>
-              </Route>
-              <Route path="/signup-failed">
-                <SignupFailure/>
-              </Route>
-              <Route path="/login">
-                <LoginForm/>
-              </Route>
-              <Route path="/login-failed">
-                <LoginFailure/>
-              </Route>
-              <Route path="/logout">
-                <Logout/>
-              </Route>
-              <Route path="/perfil">
-                <Profile/>
-              </Route>
-              <Route path="/chat">
-                <UserChat/>
-              </Route>            
-              <Route path="/nuevo-producto">
-                <CreateProductForm/>
-              </Route>
-              <Route path="/actualizar/:itemId">
-                <UpdateProductForm/>
-              </Route>
-               <Route path="/chatlist/:email">
-                <AdminChat/>
-              </Route>
-              <Route path="/chatlist">
-                <Chats/>
-              </Route>
-             
-              <Route path="/category/:categoryId">
-                <ItemListContainer greeting="Bienvenidos a la tienda"/>
-              </Route>
-              <Route path="/carrito">
-                <Cart/>
-              </Route>
-              <Route path="/checkout">
-                <OrderNew/>
-              </Route>
-              <Route path="/:itemId">
-                <ItemDetailContainer/>
-              </Route>          
-            </Switch>
-          </main>
-        </BrowserRouter>
-    </CartProvider>
+    //<SocketProvider userEmail={userEmail}>
+      <CartProvider /* setUserEmail={setUserEmail} */>
+          <BrowserRouter>
+            <NavBar/>
+            <main>
+              <Switch>
+                <Route path="/" exact>
+                  <ItemListContainer greeting="Bienvenidos a la tienda"/>
+                </Route>
+                <Route path="/signup">
+                  <SignupForm/>
+                </Route>
+                <Route path="/signup-failed">
+                  <SignupFailure/>
+                </Route>
+                <Route path="/login">
+                  <LoginForm/>
+                </Route>
+                <Route path="/login-failed">
+                  <LoginFailure/>
+                </Route>
+                <Route path="/logout">
+                  <Logout/>
+                </Route>
+                <Route path="/perfil">
+                  <Profile/>
+                </Route>
+                <Route path="/chat">
+                  <UserChat/>
+                </Route>            
+                <Route path="/nuevo-producto">
+                  <CreateProductForm/>
+                </Route>
+                <Route path="/actualizar/:itemId">
+                  <UpdateProductForm/>
+                </Route>
+                <Route path="/chatlist/:email">
+                  <AdminChat/>
+                </Route>
+                <Route path="/chatlist">
+                  <Chats/>
+                </Route>
+              
+                <Route path="/category/:categoryId">
+                  <ItemListContainer greeting="Bienvenidos a la tienda"/>
+                </Route>
+                <Route path="/carrito">
+                  <Cart/>
+                </Route>
+                <Route path="/checkout">
+                  <OrderNew/>
+                </Route>
+                <Route path="/:itemId">
+                  <ItemDetailContainer/>
+                </Route>          
+              </Switch>
+            </main>
+          </BrowserRouter>
+      </CartProvider>
+    //</SocketProvider>
   )
 }
 

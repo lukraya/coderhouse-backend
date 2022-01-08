@@ -1,17 +1,17 @@
-import React, { useContext, useEffect, } from 'react'
+import React, { useContext, /* useEffect, */ } from 'react'
 import { useParams } from 'react-router-dom'
 import { contexto } from '../../contexts/CartContext'
 import Message from '../user/Message'
 
 
 const AdminChat = () => {
-    const { getSelectedChat, selectedChat, sendMessage, user } = useContext(contexto)
+    const { /* getSelectedChat, */ selectedChat, sendMessage, user } = useContext(contexto)
     const { email } = useParams()
     let text = ''
 
-    useEffect(()=>{
+    /* useEffect(()=>{
         getSelectedChat(email)
-    }, [email, getSelectedChat])
+    }, [email, getSelectedChat]) */
 
     
     function handleSubmit(e) {
@@ -20,7 +20,7 @@ const AdminChat = () => {
         const newMessage = {
             date: new Date().toLocaleString(),
             sender: user.email === 'tiroalpanda@gmail.com' ? 'admin' : user.email,
-            recipient: user.email === 'tiroalpanda@gmail.com' ? user.email : 'admin',
+            recipient: user.email === 'tiroalpanda@gmail.com' ? email : 'admin',
             text,
         }
 

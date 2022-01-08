@@ -1,15 +1,15 @@
-import React, { useContext, useEffect, } from 'react'
+import React, { useContext, /* useEffect, */ } from 'react'
 import { contexto } from '../../contexts/CartContext'
 import Message from './Message'
 
 const UserChat = () => {
-    const { chat, getUserChat, sendMessage, user } = useContext(contexto)
-    const array = chat.chat
+    const { chat, /* getUserChat, */ sendMessage, user } = useContext(contexto)
+    //const array = chat.chat
     let text = ''
 
-    useEffect(()=>{
+    /* useEffect(()=>{
         getUserChat()
-    })
+    }) */
     
     function handleSubmit(e) {
         e.preventDefault()
@@ -28,8 +28,8 @@ const UserChat = () => {
     return (
         <div>
             <div>
-                {array 
-                ? array.map(msg=>{return <Message key={msg._id} msg={msg}/>})
+                {chat 
+                ? chat.map(msg=>{return <Message key={msg._id} msg={msg}/>})
                 : null
                 }
             </div>

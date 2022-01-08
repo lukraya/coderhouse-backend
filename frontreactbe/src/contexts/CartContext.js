@@ -1,13 +1,18 @@
-import { createContext, useState } from 'react'
+import { createContext, useEffect, useState } from 'react'
+//import { useSocket } from './SocketProvider'
+import io from 'socket.io-client'
 
 const contexto = createContext()
 const {Provider} = contexto
 
-const CartProvider = ({children}) => {
+const CartProvider = ({ /* setUserEmail, */ children}) => {
     const [user, setUser] = useState('none')
     const [cart, setCart] = useState([])
     const [chat, setChat] = useState(false)
     const [selectedChat, setSelectedChat] = useState(false)
+    const [userEmail, setUserEmail] = useState('none')
+    const [socket, setSocket] = useState(null)
+    
 
     //Trae el user
     const getUser = async ()=>{
@@ -17,6 +22,9 @@ const CartProvider = ({children}) => {
         if (result._id !== user._id) {
             console.log('resultId distinta de userId, setUser')
             setUser(result)
+        }
+        if (result.email !== 'tiroalpanda@gmail.com'){
+            setUserEmail(result.email)
         }
     }
     
@@ -127,6 +135,7 @@ const CartProvider = ({children}) => {
     }
 
     const getSelectedChat = async (email)=>{
+        setUserEmail(email)
         const response = await fetch(`http://localhost:9000/chat/${email}`)
         const result = await response.json()
         if(selectedChat === false) {
@@ -135,8 +144,23 @@ const CartProvider = ({children}) => {
         }
     }
 
+    useEffect(()=>{
+        setSocket(io.connect('http://localhost:9000', { query: { userEmail } }))
+
+        socket.on('messages', (msgs)=>{
+            setSelectedChat(msgs.chat)
+            setChat(msgs.chat)
+        })
+
+        return ()=> socket.off('messages')
+    }, [socket, userEmail])
+
     const sendMessage = async (email, msg)=>{
-        const response = await fetch(`http://localhost:9000/chat`, {
+        socket.emit('new-message', {msg, email})
+        return false
+
+        //addMessageToChat({})
+        /* const response = await fetch(`http://localhost:9000/chat`, {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json',
@@ -149,7 +173,7 @@ const CartProvider = ({children}) => {
         const result = await response.json()
         console.log(result)
         setChat(result)
-        setSelectedChat(result)
+        setSelectedChat(result) */
     }
 
     return (
