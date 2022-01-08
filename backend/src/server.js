@@ -6,13 +6,13 @@ const express = require('express')
 const app = express()
 const server = http.createServer(app)
 
-//const {Server} = require('socket.io')
-//const io = new Server(server)
-
-/* const routerAuth = express.Router()
-const routerApi = express.Router()
-const routerProductos = express.Router()
-const routerCarrito = express.Router() */
+const io = require('socket.io')(server, {
+    cors: {
+      origin: "http://localhost:3000",
+      credentials: true
+    }
+  })
+const { chatService } = require('./services')
 
 //db
 const MongoStore = require('connect-mongo')
@@ -64,14 +64,23 @@ app.use(compression())
 
 const router = require('./routes')
 app.use(router)
-/* const routesAuth = require('./routes/routesAuth')
-app.use('/auth', routesAuth(routerAuth))
-const routesApi = require('./routes/routesApi')
-app.use('/api/productos', routesApi(routerApi))
-const routesProductos = require('./routes/routesProductos')
-app.use('/productos', routesProductos(routerProductos))
-const routesCarrito = require('./routes/routesCarrito')
-app.use('/carrito', routesCarrito(routerCarrito)) */
+
+
+io.on('connection', async (socket) => {
+    const userEmail = socket.handshake.query.userEmail
+    console.log('userEmail', userEmail)
+    socket.join(userEmail)
+    let messages = await chatService.getSelectedChat(userEmail)
+    console.log(messages)
+    socket.emit('messages', {messages})
+  
+    socket.on('new-message', ({ msg, email }) => {
+      console.log('msg', msg)
+      chatService.newMessage(email, msg)
+      messages = chatService.getSelectedChat(email)
+      socket.broadcast.to(userEmail).emit('messages', {messages})
+    })
+})
 
 
 module.exports = server
