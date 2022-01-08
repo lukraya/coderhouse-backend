@@ -5,9 +5,15 @@ const chatController = (service) => ({
         res.json(result) //debería ser el array de msjs correspondientes
     },
 
+    async getSelectedChat(req, res, next) {
+        const {params: {email}} = req
+        const result = await service.getSelectedChat(email)
+        res.json(result)
+    },
+
     async newMessage(req, res, next) {
-        const { msg, userId } = req.body
-        const result = await service.newMessage(userId, msg)
+        const { msg, email } = req.body
+        const result = await service.newMessage(email, msg)
         res.json(result) //envío el array actualizado
     },
 

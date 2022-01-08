@@ -5,6 +5,7 @@ const chatRoutes = (controller) => {
     .get('/', controller.getUserChat)
     .get('/listar', controller.getAllChats)
     .post('/', controller.newMessage)
+    .get('/:email', controller.getSelectedChat)
 
     return router
 }

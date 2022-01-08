@@ -4,7 +4,12 @@ const chatService = (dao) => ({
         return chat
     },
 
-    async newMessage(userId, msg) {
+    async getSelectedChat(email) {
+        const chat = await dao.getSelectedChat(email)
+        return chat
+    },
+
+    async newMessage(email, msg) {
         const { sender } = msg
         if (sender === 'admin') {
             msg.type = 'sistema'
@@ -12,7 +17,7 @@ const chatService = (dao) => ({
             msg.type = 'usuario'
         }
 
-        const chat = await dao.addMessage(userId, msg)
+        const chat = await dao.addMessage(email, msg)
         return chat
     },
     
