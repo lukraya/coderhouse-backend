@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react'
-import { contexto } from '../../CartContext'
+import { contexto } from '../../contexts/CartContext'
 import '../../styles.css'
 
 const CartItem = ({item})=> {

@@ -6,6 +6,8 @@ const {Provider} = contexto
 const CartProvider = ({children}) => {
     const [user, setUser] = useState('none')
     const [cart, setCart] = useState([])
+    const [chat, setChat] = useState(false)
+    const [selectedChat, setSelectedChat] = useState(false)
 
     //Trae el user
     const getUser = async ()=>{
@@ -109,8 +111,50 @@ const CartProvider = ({children}) => {
         return array.reduce((suma, producto)=>suma + producto.subtotal, 0)
     }
 
+    const getUserChat = async ()=>{
+        const response = await fetch('http://localhost:9000/chat',
+                {credentials: 'include'})
+        //console.log(response)
+        try {
+            const result = await response.json()
+            //console.log(result) //This is happening FOUR times
+            if (JSON.stringify(result)!==JSON.stringify(chat)) {
+                setChat(result)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const getSelectedChat = async (email)=>{
+        const response = await fetch(`http://localhost:9000/chat/${email}`)
+        const result = await response.json()
+        if(selectedChat === false) {
+            //console.log(result)
+            setSelectedChat(result.chat)
+        }
+    }
+
+    const sendMessage = async (email, msg)=>{
+        const response = await fetch(`http://localhost:9000/chat`, {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email,
+                msg
+            })
+        })
+        const result = await response.json()
+        console.log(result)
+        setChat(result)
+        setSelectedChat(result)
+    }
+
     return (
-        <Provider value={{cart, user, addItem, removeItemCart, clear, precioTotal, getUser, getCart, updateItemCart}}>
+        <Provider value={{cart, user, chat, addItem, removeItemCart, clear, precioTotal, getUser, 
+            getCart, updateItemCart, getUserChat, sendMessage, getSelectedChat, selectedChat}}>
             {children}
         </Provider>
     )

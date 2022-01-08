@@ -1,6 +1,6 @@
 import {useContext} from 'react'
 import {NavLink} from 'react-router-dom'
-import {contexto} from '../../CartContext'
+import {contexto} from '../../contexts/CartContext'
 import '../../styles.css'
 
 const Item = ({item})=> {

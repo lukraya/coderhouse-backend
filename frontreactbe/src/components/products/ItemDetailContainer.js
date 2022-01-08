@@ -1,7 +1,7 @@
 import React, {useEffect, useState, useContext} from 'react'
 import {useParams} from 'react-router-dom'
 import ItemDetail from './ItemDetail'
-import { contexto } from '../../CartContext'
+import { contexto } from '../../contexts/CartContext'
 import '../../styles.css'
 
 const ItemDetailContainer = ()=> {
@@ -12,7 +12,7 @@ const ItemDetailContainer = ()=> {
     useEffect(()=>{
         getOneProduct(itemId)
         getCart()
-    }, [itemId])
+    }, [itemId, getCart])
     
     const getOneProduct = async (id)=>{
         const response = await fetch(`http://localhost:9000/productos/${id}`)
