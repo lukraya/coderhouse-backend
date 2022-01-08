@@ -147,7 +147,7 @@ const CartProvider = ({children}) => {
             })
         })
         const result = await response.json()
-        console.log(result)
+        //console.log(result)
         setChat(result)
         setSelectedChat(result)
     }
