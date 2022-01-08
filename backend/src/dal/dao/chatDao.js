@@ -11,7 +11,7 @@ const chatDao = (model) => ({
     },
 
     async addMessage(email, msg) {
-        const user = await model.findOne({email: email})            
+        const user = await model.findOne({email: email})
         user.chat.push(msg)
         await user.save((err)=>{
             if (err) console.log(`error saving doc`)
