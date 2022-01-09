@@ -28,13 +28,6 @@ const cartController = (service) => ({
         //console.log(result)
         res.json(result)
     },
-
-    async createOrder(req, res, next) {
-        const {order} = req.body
-        await alertNewOrder(order)
-    
-        res.json({msj: "Alertas enviadas."})
-    },
 })
 
 module.exports = cartController

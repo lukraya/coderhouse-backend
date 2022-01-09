@@ -8,7 +8,7 @@ const userSchema = new Schema({
     age: Number,
     cellphone: String,
     avatar: String,
-    email: String,
+    email: {type: String, unique: true},
     cart: [cartSchema],
     chat: [messageSchema],
     hash: String,

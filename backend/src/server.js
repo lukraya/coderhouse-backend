@@ -1,18 +1,10 @@
-const { SESSION_SECRET, MONGO_URI } = require('./config/globals')
+const { SESSION_SECRET, SESSION_EXPIRATION, MONGO_URI } = require('./config/globals')
 
 //CONFIG DEL SERVIDOR
 const http = require('http')
 const express = require('express')
 const app = express()
 const server = http.createServer(app)
-
-//const {Server} = require('socket.io')
-//const io = new Server(server)
-
-/* const routerAuth = express.Router()
-const routerApi = express.Router()
-const routerProductos = express.Router()
-const routerCarrito = express.Router() */
 
 //db
 const MongoStore = require('connect-mongo')
@@ -40,7 +32,7 @@ app.use(
         saveUninitialized: true,
         rolling: true,
         cookie: {
-            maxAge: 600 * 1000
+            maxAge: SESSION_EXPIRATION * 1000
         }
     })
 )
@@ -64,14 +56,6 @@ app.use(compression())
 
 const router = require('./routes')
 app.use(router)
-/* const routesAuth = require('./routes/routesAuth')
-app.use('/auth', routesAuth(routerAuth))
-const routesApi = require('./routes/routesApi')
-app.use('/api/productos', routesApi(routerApi))
-const routesProductos = require('./routes/routesProductos')
-app.use('/productos', routesProductos(routerProductos))
-const routesCarrito = require('./routes/routesCarrito')
-app.use('/carrito', routesCarrito(routerCarrito)) */
 
 
 module.exports = server

@@ -1,5 +1,6 @@
 const productController = (service) => ({
     async createProduct(req, res, next) {
+        console.log('prod body', req.body)
         const result = await service.createProduct(req.body)
         if (result === 'success') {
             res.redirect('http://localhost:3000/')

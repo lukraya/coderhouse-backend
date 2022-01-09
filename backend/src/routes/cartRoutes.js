@@ -12,8 +12,7 @@ const cartRoutes = (controller) => {
     .get('/listar', controller.getAllItems)
     .patch('/actualizar/:cartId', controller.updateItem)
     .delete('/borrar/:cartId', controller.deleteItem)
-    .patch('/borrar', controller.deleteAll)    
-    .post('/orden', controller.createOrder)    
+    .patch('/borrar', controller.deleteAll)
     
     return router
 }

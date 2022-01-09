@@ -81,14 +81,14 @@ const notificationService = () => ({
     },
 
     //Alert admin of new order via gmail & user via sms
-    async alertNewOrder (orderData) {
-        const { name, email, cellphone } = orderData.from
-        const { total, products } = orderData
+    async alertNewOrder (order) {
+        const { name, email, phone } = order.from
+        const { total, items } = order
 
         //const prodsHtml = await generateHtml(products)
         
-        await sendMailOrder(name, email, total, products)
-        await sendSmsOrder(cellphone)        
+        await sendMailOrder(name, email, total, items)
+        await sendSmsOrder(phone)
     },
 })
 
