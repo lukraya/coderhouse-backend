@@ -6,7 +6,6 @@ const orderDao = (model) => ({
 
     async getNumOrders() {
         const orders = await model.find()
-        //console.log('orders', orders)
         return orders.length
     }
 })

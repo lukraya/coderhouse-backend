@@ -1,7 +1,6 @@
 const orderController = ({ orderService, notificationService}) => ({
-    async createOrder(req, res, next) {
-        const { order } = req.body 
-        //console.log(order)
+    async createOrder(req, res) {
+        const { order } = req.body
         const result = await orderService.createOrder(order)
         await notificationService.alertNewOrder(order)
 

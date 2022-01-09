@@ -7,7 +7,7 @@ const cartDao = (model) => ({
                 if (err) console.log(`error saving doc`)
             })
             const itemAdded = user.cart[user.cart.length - 1]
-            //console.log('cartdao', user.cart)
+            
             return itemAdded
         } catch (error) {
             console.log('Cart item creation failed', error)

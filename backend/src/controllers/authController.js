@@ -1,11 +1,10 @@
 const authController = (service) => ({
-    async signup(req, res, next) {
+    async signup(req, res) {
         service.alertNewUser(req.user)
-    
         res.redirect('http://localhost:3000/')
     },
 
-    async logout(req, res, next) {
+    async logout(req, res) {
         try {
             req.logout()
             res.json({msj: 'success'})
@@ -15,7 +14,7 @@ const authController = (service) => ({
         }
     },
 
-    async getUser(req, res, next) {
+    async getUser(req, res) {
         let user
         if (req.user) {
             user = req.user

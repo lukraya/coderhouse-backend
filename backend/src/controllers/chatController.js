@@ -1,23 +1,22 @@
 const chatController = (service) => ({
-    async getUserChat(req, res, next) {
+    async getUserChat(req, res) {
         const result = await service.getUserChat(req.user._id)
-        //console.log(result)
-        res.json(result) //debería ser el array de msjs correspondientes
+        res.json(result)
     },
 
-    async getSelectedChat(req, res, next) {
+    async getSelectedChat(req, res) {
         const {params: {email}} = req
         const result = await service.getSelectedChat(email)
         res.json(result)
     },
 
-    async newMessage(req, res, next) {
+    async newMessage(req, res) {
         const { msg, email } = req.body
         const result = await service.newMessage(email, msg)
-        res.json(result) //envío el array actualizado
+        res.json(result)
     },
 
-    async getAllChats(req, res, next) {
+    async getAllChats(req, res) {
         const result = await service.getAllChats()
         res.json(result)
     }

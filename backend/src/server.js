@@ -1,26 +1,21 @@
 const { SESSION_SECRET, SESSION_EXPIRATION, MONGO_URI } = require('./config/globals')
 
-//CONFIG DEL SERVIDOR
 const http = require('http')
 const express = require('express')
 const app = express()
 const server = http.createServer(app)
 
-//db
 const MongoStore = require('connect-mongo')
 const mongoOptions = {useNewUrlParser: true, useUnifiedTopology: true}
 
-//Authentication
 const passport = require('passport')
 const session = require("express-session")
 require('./auth/passportLocal')
 
-//Require middlewares
 const cookieParser = require('cookie-parser')
 const cors = require('cors')
 const compression = require('compression')
 
-//Middleware session
 app.use(
     session({
         store: MongoStore.create({
@@ -37,7 +32,6 @@ app.use(
     })
 )
 
-//Cors config
 const corsOptions = {
     origin: 'http://localhost:3000',
     credentials: true,
@@ -45,7 +39,6 @@ const corsOptions = {
     optionsSuccessStatus: 200
 }
 
-//Setting middlewares
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(passport.initialize())

@@ -4,7 +4,8 @@ const productRoutes = require('./productRoutes')
 const cartRoutes = require('./cartRoutes')
 const chatRoutes = require('./chatRoutes')
 const orderRoutes = require('./orderRoutes')
-const { authController, productController, cartController, chatController, orderController  } = require('../controllers')
+const { authController, productController, cartController, chatController, 
+    orderController  } = require('../controllers')
 
 const router = require('express').Router()
 

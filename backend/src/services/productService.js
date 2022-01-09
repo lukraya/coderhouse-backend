@@ -15,8 +15,7 @@ const productService = (dao) => ({
 
     async getProduct(id) {
         const prod = await dao.getById(id)
-        //console.log(prod._id)
-        if (prod._id == id) { //IMPORTANTE: === falla, por new ObjectId
+        if (prod._id == id) {
             return prod
         } else {
             return 'error'

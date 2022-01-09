@@ -50,7 +50,7 @@ const sendMailOrder = async (name, email, total, products)=>{
                 </ul>    
             `,
         })
-        console.log('mail enviado')
+        console.log('Alerta de mail enviada')
     } catch (error) {
         console.log(`Error al enviar mail: ${error}`)
     }
@@ -61,9 +61,9 @@ const sendSmsOrder = async (phone)=>{
         await twilioClient.messages.create({
             body: `Su pedido ha sido recibido y se encuentra en proceso.`,
             from: '+13203387865',
-            to: ADMIN_PHONE //phone
+            to: ADMIN_PHONE
         })
-        console.log('mensaje enviado')
+        console.log('Alerta de sms enviada')
     } catch (error) {
         console.log(`Error al enviar sms: ${error}`)
     }
@@ -71,7 +71,6 @@ const sendSmsOrder = async (phone)=>{
 
 
 const notificationService = () => ({
-    //Alert admin of new sign up via gmail
     async alertNewUser (userData) {
         try {
             await sendMailSignup(userData)
@@ -80,12 +79,9 @@ const notificationService = () => ({
         }
     },
 
-    //Alert admin of new order via gmail & user via sms
     async alertNewOrder (order) {
         const { name, email, phone } = order.from
         const { total, items } = order
-
-        //const prodsHtml = await generateHtml(products)
         
         await sendMailOrder(name, email, total, items)
         await sendSmsOrder(phone)
