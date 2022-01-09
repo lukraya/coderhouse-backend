@@ -16,22 +16,26 @@ const Cart = () => {
       from: {
         name: userData.name,
         email: userData.email,
-        phone: userData.cellphone
+        phone: userData.cellphone,
+        address: userData.address
       },
       total: precioTotal(items),
-      products: items
+      items,
+      date: new Date().toLocaleString(),
+      state: 'generada'
     }
-
-    const response = await fetch('http://localhost:9000/carrito/orden', {
+    
+    const response = await fetch('http://localhost:9000/orden', {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ order })
+      body: JSON.stringify({order})
     })
 
     const result = await response.json()
-    if (result.msj === 'Alertas enviadas.') {
+    console.log(result)
+    if (result.msg === 'success') {
       setRedirect('/checkout')
     }
   }
