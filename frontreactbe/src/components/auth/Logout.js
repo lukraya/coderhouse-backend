@@ -12,7 +12,6 @@ const Logout = () => {
             const response = await fetch('http://localhost:9000/auth/logout', 
                 {credentials: 'include'})
             const result = await response.json()
-            //console.log(result)
             if (result.msj === 'success') {
                 setSuccess(true)
             } else {

@@ -16,7 +16,6 @@ const SignupForm = () => {
                 <label htmlFor="cellphone">Celular: </label>
                 <input type="text" name="cellphone" id="cellphone"/><br/>
 
-                {/* Temporal como type=text */}
                 <label htmlFor="avatar">Imagen de perfil: </label>
                 <input type="text" name="avatar" id="avatar"/><br/>
 

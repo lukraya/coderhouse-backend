@@ -9,28 +9,23 @@ const CartProvider = ({children}) => {
     const [chat, setChat] = useState(false)
     const [selectedChat, setSelectedChat] = useState(false)
 
-    //Trae el user
     const getUser = async ()=>{
         const response = await fetch('http://localhost:9000/auth/user', 
                 {credentials: 'include'})
         const result = await response.json()
         if (result._id !== user._id) {
-            //console.log('resultId distinta de userId, setUser')
             setUser(result)
         }
     }
     
-    //Recibe información de ItemDetail
     const addItem = (objetoItem, quantity)=> {
         crearProducto(objetoItem, quantity, isInCart)        
     }
-    //Crea el producto para pasarlo a la lógica
     const crearProducto = (objetoItem, cantidad, callback)=> {
         const subtotal = cantidad * objetoItem.price
-        const itemAgregado = {product: objetoItem, quantity: cantidad, subtotal/* subtotal: subtotal */}              
+        const itemAgregado = {product: objetoItem, quantity: cantidad, subtotal}              
         callback(itemAgregado)
     }
-    //Chuequea si el producto ya fue agregado, si no, lo agrega
     const isInCart = (prod)=> {
        const existe = cart.find(element => element.product._id === prod.product._id)
         if (!existe) {
@@ -38,7 +33,6 @@ const CartProvider = ({children}) => {
         }
         else{alert("El producto ya se encuentra en el carrito.")}
     }    
-    //Actualizar el usuario con propiedad cart! (Post a db & getting the user: OLD)
     const createItem = async(prod)=>{
         const userId = user._id
         const response = await fetch(`http://localhost:9000/carrito/agregar/`, {
@@ -55,7 +49,6 @@ const CartProvider = ({children}) => {
         setCart(result)
     }
 
-    //Remover todos los items del carrito
     const clear = async ()=> {
         const response = await fetch(`http://localhost:9000/carrito/borrar/`, {
             method: 'PATCH',
@@ -72,18 +65,15 @@ const CartProvider = ({children}) => {
         } else { alert('Hubo un error!') }
     }
 
-    //Trae user.cart
     const getCart = async ()=>{
         const response = await fetch('http://localhost:9000/carrito/listar',
                 {credentials: 'include'})
         const result = await response.json()
-        //console.log(result)
         if (JSON.stringify(result)!==JSON.stringify(cart)) {
             setCart(result)
         }
     }
         
-    //Remover un item del carrito usando su id
     const removeItemCart = async (itemId)=> {
         const response = await fetch(`http://localhost:9000/carrito/borrar/${itemId}`, {
             method: 'delete',
@@ -106,7 +96,6 @@ const CartProvider = ({children}) => {
         console.log(result)
     }
 
-    //Sumar todos los subtotales
     const precioTotal = (array)=>{
         return array.reduce((suma, producto)=>suma + producto.subtotal, 0)
     }
@@ -114,10 +103,8 @@ const CartProvider = ({children}) => {
     const getUserChat = async ()=>{
         const response = await fetch('http://localhost:9000/chat',
                 {credentials: 'include'})
-        //console.log(response)
         try {
             const result = await response.json()
-            //console.log(result) //This is happening FOUR times
             if (JSON.stringify(result)!==JSON.stringify(chat)) {
                 setChat(result)
             }
@@ -130,7 +117,6 @@ const CartProvider = ({children}) => {
         const response = await fetch(`http://localhost:9000/chat/${email}`)
         const result = await response.json()
         if(selectedChat === false) {
-            //console.log(result)
             setSelectedChat(result.chat)
         }
     }
@@ -147,7 +133,6 @@ const CartProvider = ({children}) => {
             })
         })
         const result = await response.json()
-        //console.log(result)
         setChat(result)
         setSelectedChat(result)
     }

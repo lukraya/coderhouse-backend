@@ -10,7 +10,7 @@ const Chats = () => {
 
     const getAllChats = async ()=>{
         const response = await fetch('http://localhost:9000/chat/listar',
-                {credentials: 'include'}) //no necesito las credentials, creo
+                {credentials: 'include'})
         const result = await response.json()
         console.log(result)
         if (JSON.stringify(result)!==JSON.stringify(chats)) {

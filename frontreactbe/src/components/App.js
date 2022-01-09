@@ -1,22 +1,22 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import CartProvider from '../contexts/CartContext'
 import NavBar from './NavBar'
-import ItemListContainer from './products/ItemListContainer'
-import ItemDetailContainer from './products/ItemDetailContainer'
 import SignupForm from './auth/SignupForm'
 import SignupFailure from './auth/SignupFailure'
-import LoginFailure from './auth/LoginFailure'
 import LoginForm from './auth/LoginForm'
+import LoginFailure from './auth/LoginFailure'
 import Logout from './auth/Logout'
-import Profile from './user/Profile'
-import Cart from './cart/Cart'
-import OrderNew from './cart/OrderNew'
+import ItemListContainer from './products/ItemListContainer'
+import ItemDetailContainer from './products/ItemDetailContainer'
 import CreateProductForm from './api/CreateProductForm'
 import UpdateProductForm from './api/UpdateProductForm'
-import '../styles.css'
-import UserChat from './user/UserChat'
 import Chats from './api/Chats'
 import AdminChat from './api/AdminChat'
+import Profile from './user/Profile'
+import UserChat from './user/UserChat'
+import Cart from './cart/Cart'
+import OrderNew from './cart/OrderNew'
+import '../styles.css'
 
 
 const App = ()=>{
@@ -62,7 +62,6 @@ const App = ()=>{
               <Route path="/chatlist">
                 <Chats/>
               </Route>
-             
               <Route path="/category/:categoryId">
                 <ItemListContainer greeting="Bienvenidos a la tienda"/>
               </Route>

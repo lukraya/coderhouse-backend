@@ -12,9 +12,7 @@ const ItemDetail = ({item})=>{
     const {addItem} = useContext(contexto)
 
     const onAdd = ()=>{
-        //Efectuar cambios en el stock
         handleStock()
-        //Mandar la info del item y su cant al contexto
         addItem(item, count)        
     }
     const handleStock = ()=> {
